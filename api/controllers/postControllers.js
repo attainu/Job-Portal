@@ -2,27 +2,11 @@ const JobDetail = require("../models/Job");
 const JobProviderDetail = require("../models/JobProvider");
 const JobSeekerDetail = require("../models/jobSeeker");
 const jwt = require("jsonwebtoken");
-const uuid = require("uuid/v4");
+const bcrypt = require("bcryptjs")
 
 module.exports = {
   postingJob: function(req, res) {
     const jobdetail = new JobDetail({ ...req.body });
-    // ({
-    //     category: req.body.category,
-    //     duration: req.body.duration,
-    //     title:req.body.title,
-    //     description:req.body.description,
-    //     preferedSkills:req.body.preferedSkills,
-    //     rateOfPayment:req.body.rateOfPayment,
-    //     preference:req.body.preference,
-    //     timeSlot:req.body.timeSlot,
-    //     keyword:req.body.keyword,
-    //     contactNumber:req.body.contactNumber,
-    //     jobProviderName:req.body.jobProviderName,
-    //     city:req.body.city,
-    //     pincode:req.body.pincode,
-    //     address:req.body.address
-    // });
     jobdetail
       .save()
       .then(() => {
@@ -36,7 +20,7 @@ module.exports = {
   },
   userRegister: function(req, res) {
     if (req.body.role == "Job-Provider") {
-      const jobProviderDetail = new JobProviderDetail({ ...req.body });
+      const jobProviderDetail = new JobProviderDetail({ ...req.body});
       jobProviderDetail
         .save()
         .then(() => {
@@ -59,8 +43,8 @@ module.exports = {
           console.log(err.message);
           return res.status(403).send(err.message);
         });
-    }
-  },
+    }},
+
   userLogin: function(req, res) {
     if (req.body.role == "Job-Provider") {
       var email = req.body.email;
@@ -69,16 +53,17 @@ module.exports = {
         return res.status(400).send("Incorrect credentials");
       JobProviderDetail.findByEmailAndPassword(email, password)
         .then(function(user) {
-          console.log(user);
-          var id = uuid();
-          jwt.sign({ id: id }, process.env.privateKey, { expiresIn: 60 * 60 * 1 }, function(err,token) {
+          jwt.sign({ _id: user._id }, process.env.privateKey, { expiresIn: 60 * 60 * 1 }, function(err,token) {
             if (err) {
               console.log(err.message);
               return res.status(500).send("Server Error");
             }
-            user.jwt = token;
+            user.jwt=token;
+            user.save()
+            
+            console.log(user)
+            res.status(200).send(user);
           });
-          res.status(200).send("Login Succefull", user);
         })
         .catch(function(err) {
           console.log(err.message);
@@ -89,18 +74,19 @@ module.exports = {
       var password = req.body.password;
       if (!email || !password)
         return res.status(400).send("Incorrect credentials");
-        jobSeekerDetail.findByEmailAndPassword(email, password)
+      JobSeekerDetail.findByEmailAndPassword(email, password)
         .then(function(user) {
-          console.log(user);
-          var id = uuid();
-          jwt.sign({ id: id }, process.env.privateKey, { expiresIn: 60 * 60 * 1 }, function(err,token) {
+          jwt.sign({ _id: user._id }, process.env.privateKey, { expiresIn: 60 * 60 * 1 }, function(err,token) {
             if (err) {
               console.log(err.message);
               return res.status(500).send("Server Error");
             }
-            user.jwt = token;
+            user.jwt=token;
+            user.save()
+            
+            console.log(user)
+            res.status(200).send(user);
           });
-          res.status(200).send("Login Succefull", user);
         })
         .catch(function(err) {
           console.log(err.message);
@@ -108,9 +94,28 @@ module.exports = {
         });
     }
   }
+}
 
-  //   logout: function (req, res) {
-  //     req.session.destroy();
-  //     return res.redirect("/");
-  //   }
-};
+    // userLogin : async (req, res) => {
+    //   if(req.body.role === 'Job-Provider'){
+    //     const {email, password} = req.body
+    //     if(!email || !password){
+    //       return res.status(400).send('Invalid email and Password')
+    //     }else{
+    //       const user = await JobProviderDetail.find({email : email})
+    //       if(!user){
+    //         return res.send({Error : ' '})
+    //       }else{
+    //         const ismatched = await bcrypt.compare(password, user[0].password)
+    //         if(!ismatched){
+    //           return res.send({Error : ''})
+    //         }else{
+    //           const token = await jwt.sign({_id : user._id}, process.env.privatekey, {expiresIn : 60})
+    //           user[0].jwt = token
+    //           await JobProviderDetail.findByIdAndUpdate()
+    //           console.log('logged in')
+    //         }
+    //       }
+    //     }
+    //   }
+    // }

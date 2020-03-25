@@ -41,14 +41,17 @@ const jobProviderSchema = new Schema({
         type: Number,
          default: 0
     },
-    jwt: []
+    jwt:{
+      type:String,
+      default:""
+    }
 }, { timestamps: true })
 
 
 jobProviderSchema.statics.findByEmailAndPassword = function(email, password) {
     var userObj = null;
     return new Promise(function(resolve, reject) {
-      User.findOne({ email: email })
+      JobProviderDetails.findOne({ email: email })
         .then(function(user) {
           if (!user) reject("Incorrect credentials");
           userObj = user;
