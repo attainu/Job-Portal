@@ -2,9 +2,9 @@
   "name": "Job-Portal",
   "version": "1.0.0",
   "description": "Project done by Siddhida and Harish Ponna",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
