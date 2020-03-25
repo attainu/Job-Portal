@@ -62,6 +62,14 @@ const jobDetailSchema = new Schema({
     isAccepted:{
         type:Boolean,
         default:false
+    },
+    jobProviderId:{ 
+        type: Schema.Types.ObjectId,
+        ref: 'jobProviderDetail' 
+    },
+    jobSeekerId: {
+        type: Schema.Types.ObjectId,
+        ref: 'jobSeekerDetail'
     }
 }, { timestamps: true })
 

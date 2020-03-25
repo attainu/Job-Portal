@@ -117,5 +117,12 @@ module.exports = {
                 console.log(err.message)
                 return res.status(404).send(err.message)
             });
+    },
+    allJobsAcceptedTillDateByAParticularSeeker: function (req, res){
+
+    },
+    jobsPostedByAParticularProvider: function (req, res){
+
     }
+
 }

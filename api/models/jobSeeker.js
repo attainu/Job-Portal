@@ -2,8 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const bcrypt = require("bcryptjs")
 
-
-const jobProviderSchema = new Schema({
+const jobSeekerSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -37,15 +36,15 @@ const jobProviderSchema = new Schema({
         type: String,
         required: true
     },
-    totalPosted: {
+    totalAccepted: {
         type: Number,
-         default: 0
+        default: 0
     },
     jwt: []
 }, { timestamps: true })
 
 
-jobProviderSchema.statics.findByEmailAndPassword = function(email, password) {
+jobSeekerSchema.statics.findByEmailAndPassword = function(email, password) {
     var userObj = null;
     return new Promise(function(resolve, reject) {
       User.findOne({ email: email })
@@ -64,7 +63,7 @@ jobProviderSchema.statics.findByEmailAndPassword = function(email, password) {
     });
   };
   
-  jobProviderSchema.pre("save", function(next) {
+  jobSeekerSchema.pre("save", function(next) {
     var user = this;
     if (user.isModified("password")) {
       bcrypt
@@ -84,7 +83,6 @@ jobProviderSchema.statics.findByEmailAndPassword = function(email, password) {
   });
 
 
+const JobSeekerDetails = mongoose.model("jobSeekerDetail", jobSeekerSchema)
 
-const JobProviderDetails=mongoose.model("jobProviderDetail", jobProviderSchema)
-
-module.exports=JobProviderDetails
+module.exports=JobSeekerDetails

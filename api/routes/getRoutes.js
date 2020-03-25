@@ -1,17 +1,19 @@
 const { Router } = require("express");
 const router = Router();
-const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs,filteringJobs }=require("../controllers/getControllers")
+const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs, allJobsAcceptedTillDateByAParticularSeeker, jobsPostedByAParticularProvider }=require("../controllers/getControllers")
 const api_key = process.env.api_key
 
 
 // -----------------Job Providers Routes-----------------------
 
-router.get(`/api/jobproviders/provider/postedjobs/:pagenumber/${api_key}`, searchNotYetAcceptedJobs)
+router.get(`/api/jobprovider/postedjobs/:pagenumber/${api_key}`, jobsPostedByAParticularProvider)
 
 
 
 
 // -------------------Job Seekers Routes--------------------------------
+
+router.get(`/api/jobseeker/searchjobs/alljobsacceptedtilldate/:pagenumber/${api_key}`, allJobsAcceptedTillDateByAParticularSeeker )
 
 router.get(`/api/jobseeker/searchjobs/notyetaccepted/:pagenumber/${api_key}`, searchNotYetAcceptedJobs)
 router.get(`/api/jobseeker/searchjobs/bycategory/:category/:pagenumber/${api_key}`, searchJobsByCategory)
