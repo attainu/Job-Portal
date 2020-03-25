@@ -27,30 +27,43 @@ const jobDetailSchema = new Schema({
         required: true
     },
     preference: {
-        type:String,
-        require:true
+        type: String,
+        require: true
     },
-    postedAt:{
-        type:Date,
+    postedAt: {
+        type: Date,
+        default: Date.now()
+    },
+    timeSlot: {
+        type: String,
+        required: true
+    },
+    keyword:[],    
+    jobProviderName: {
+        type: String,
+        required: true
+    },
+    contactNumber: {
+        type: Number,
+        required: true
+    },
+    city:{
+        type:String,
         required:true
     },
-    timeSlot:{
-        type:String,
-        required:true
-    },
-    keyword:{
-        type:String,
-        required:true
-    },
-    contactNumber:{
+    pincode:{
         type:Number,
         required:true
     },
-    jobProviderName:{
+    address:{
         type:String,
         required:true
+    },
+    isAccepted:{
+        type:Boolean,
+        default:false
     }
-},{timestamps:true})
+}, { timestamps: true })
 
 const JobDetails = mongoose.model("jobDetail", jobDetailSchema)
 

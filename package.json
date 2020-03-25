@@ -2,9 +2,9 @@
   "name": "Job-Portal",
   "version": "1.0.0",
   "description": "Project done by Siddhida and Harish Ponna",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/attainu/Job-Portal/issues"
   },
-  "homepage": "https://github.com/attainu/Job-Portal#readme"
+  "homepage": "https://github.com/attainu/Job-Portal#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5"
+  }
 }

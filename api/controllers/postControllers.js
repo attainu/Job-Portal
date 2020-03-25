@@ -12,11 +12,13 @@ module.exports = {
             preferedSkills:req.body.preferedSkills,
             rateOfPayment:req.body.rateOfPayment,
             preference:req.body.preference,
-            postedAt:new Date(),
             timeSlot:req.body.timeSlot,
             keyword:req.body.keyword,
             contactNumber:req.body.contactNumber,
-            jobProviderName:req.body.jobProviderName
+            jobProviderName:req.body.jobProviderName,
+            city:req.body.city,
+            pincode:req.body.pincode,
+            address:req.body.address
         });
         jobdetail.save()
         .then(()=>{

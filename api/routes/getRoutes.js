@@ -1,23 +1,34 @@
 const { Router } = require("express");
 const router = Router();
-const { renderingJobs }=require("../controllers/getControllers")
+const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs,filteringJobs }=require("../controllers/getControllers")
 const api_key = process.env.api_key
 
-router.get(`/api/jobseeker/renderingjobs/${api_key}`, renderingJobs)
+
+// -----------------Job Providers Routes-----------------------
+
+router.get(`/api/jobproviders/provider/postedjobs/:pagenumber/${api_key}`, searchNotYetAcceptedJobs)
+
+
+
+
+// -------------------Job Seekers Routes--------------------------------
+
+router.get(`/api/jobseeker/searchjobs/notyetaccepted/:pagenumber/${api_key}`, searchNotYetAcceptedJobs)
+router.get(`/api/jobseeker/searchjobs/bycategory/:category/:pagenumber/${api_key}`, searchJobsByCategory)
+router.get(`/api/jobseeker/searchjobs/bycity/:city/:pagenumber/${api_key}`, searchJobsByCity)
+router.get(`/api/jobseeker/searchjobs/bypincode/:pincode/:pagenumber/${api_key}`, searchJobsByPincode)
+router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/${api_key}`, searchJobById)
+router.get(`/api/jobseeker/searchjobs/bykeyword/:keyword/:pagenumber/${api_key}`, searchJobByKeyword)
+
+
+
+// -----------------------Admin Routes---------------------------
+
+router.get(`/api/admin/searchjobs/alljobs/:pagenumber/${api_key}`, searchAllJobs)
+router.get(`/api/admin/searchjobs/acceptedjobs/:pagenumber/${api_key}`, searchAcceptedJobs)
+router.get(`/api/admin/searchjobs/notyetaccepted/:pagenumber/${api_key}`, searchNotYetAcceptedJobs)
 
 
 
 module.exports=router;
 
-// fetch("https://localhost:8080/api/jobseeker/renderingjobs/123456")
-// .then( function(data){
-//     return data.json()
-// })
-// .then(function(data) {
-//     console.log(data)
-// })
-// .catch(function(e){
-//         console.log(e);
-// })
-    
-//fetch("http://localhost:8080/api/jobseeker/renderingjobs/123456").then((res)=>res.json()).then((data)=>console.log(data))
