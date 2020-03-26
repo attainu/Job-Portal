@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const bcrypt = require("bcryptjs")
+const joi = require("joi")
 
 
 const jobProviderSchema = new Schema({
@@ -44,6 +45,13 @@ const jobProviderSchema = new Schema({
     jwt:{
       type:String,
       default:""
+    },
+    tempJwt:{
+      type:String,
+      },
+    isVerified:{
+      type:Boolean,
+      default:false
     }
 }, { timestamps: true })
 

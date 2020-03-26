@@ -1,4 +1,7 @@
 const JobDetail = require("../models/Job")
+const JobProviderDetail = require("../models/JobProvider")
+const JobSeekerDetail = require("../models/jobSeeker")
+const jwt = require("jsonwebtoken")
 
 module.exports = {
     searchNotYetAcceptedJobs: function (req, res) {
@@ -149,5 +152,29 @@ module.exports = {
             console.log(err.message)
             return res.status(404).send(err.message)
         });
+    },
+    providerAccountActivation:function(req,res){
+      if(!req.params.tempJwt) return res.status(401)
+      jwt.verify(req.params.tempJwt,process.env.TEMP_TOKEN_SECRET, (err,data)=>{
+        if(err) res.send(err)
+        JobProviderDetail.findOneAndUpdate({tempJwt:req.params.tempJwt},{isVerified:true})
+        .then((user)=>{
+          console.log(user);
+          res.status(200).send("Jobprovider account verified successfully")
+        })
+  
+      })
+    },
+  
+    seekerAccountActivation:function(req,res){
+      if(!req.params.tempJwt) return res.status(401)
+      jwt.verify(req.params.tempJwt,process.env.TEMP_TOKEN_SECRET, (err,data)=>{
+        if(err) res.send(err)
+        JobSeekerDetail.findOneAndUpdate({tempJwt:req.params.tempJwt},{isVerified:true})
+        .then((user)=>{
+          console.log(user);
+          res.status(200).send("JobSeeker account verified successfully")
+        })
+      })
     }
 }

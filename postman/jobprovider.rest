@@ -1,0 +1,43 @@
+###########################   PROVIDER ROUTES   #################
+
+################ GET
+
+###  Showing provider his own posted jobs
+GET http://localhost:8080/api/jobprovider/postedjobs/:pagenumber/
+
+
+###  Provider Account Activation
+GET http://localhost:8080/api/provideraccountactivation/:temptoken
+
+
+
+
+################ POST
+
+### Posting a job by provider
+POST http://localhost:8080/api/jobprovider/postingjob
+
+### Registering Provider Account
+POST http://localhost:8080/api/user/register
+
+### Logging into Provider Account
+POST http://localhost:8080/api/user/login
+
+
+
+################ UPDATE
+
+###  Job updation by Provider Account
+PATCH http://localhost:8080/api/jobprovider/udpatingjob/:jobid/
+
+
+################ DELETE
+
+###  Job Deletion by Provider
+DELETE http://localhost:8080/api/jobprovider/deletingjob/:jobid/
+
+###  Logging out from Provider Account
+DELETE http://localhost:8080/api/user/jobprovider/logout/
+
+
+

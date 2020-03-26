@@ -2,7 +2,8 @@ const JobDetail = require("../models/Job");
 const JobProviderDetail = require("../models/JobProvider");
 const JobSeekerDetail = require("../models/jobSeeker");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const uuid=require("uuid/v4")
+const sendMailToUser = require("../utils/nodeMailer")
 
 function jobProviderJobsIncrement(totalPosted){
          return totalPosted+=1
@@ -28,10 +29,12 @@ module.exports = {
   },
   userRegister: function(req, res) {
     if (req.body.role == "Job-Provider") {
-      const jobProviderDetail = new JobProviderDetail({ ...req.body});
+     const tempJwt=  jwt.sign({id:Math.random()},process.env.TEMP_TOKEN_SECRET)
+      const jobProviderDetail = new JobProviderDetail({ ...req.body,tempJwt:tempToken});
       jobProviderDetail
         .save()
         .then(() => {
+          sendMailToUser("provider",req.body.email,tempJwt);
           console.log("Provider registered Successfully");
           res.status(200).json(jobProviderDetail);
         })
@@ -40,10 +43,12 @@ module.exports = {
           return res.status(403).send(err.message);
         });
     } else {
-      const jobSeekerDetail = new JobSeekerDetail({ ...req.body });
+      const tempJwt=  jwt.sign({id:Math.random()},process.env.TEMP_TOKEN_SECRET)
+      const jobSeekerDetail = new JobSeekerDetail({ ...req.body,tempJwt:tempJwt});
       jobSeekerDetail
         .save()
         .then(() => {
+          sendMailToUser("seeker",req.body.email,tempJwt);
           console.log("Seeker Registered Successfully");
           res.status(200).json(jobSeekerDetail);
         })
@@ -61,6 +66,7 @@ module.exports = {
         return res.status(400).send("Incorrect credentials");
       JobProviderDetail.findByEmailAndPassword(email, password)
         .then(function(user) {
+          if(!user.isVerified) return res.status(404).send("job provider not verified, please activate link sent to u through email")
           jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 1000 * 60 * 10 }, function(err,token) {
             if (err) {
               console.log(err.message);
@@ -86,6 +92,7 @@ module.exports = {
         return res.status(400).send("Incorrect credentials");
       JobSeekerDetail.findByEmailAndPassword(email, password)
         .then(function(user) {
+          if(!user.isVerified) return res.send("job seeker not verified, please activate link sent to u through email")
           jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 6000 * 60 * 1 }, function(err,token) {
             if (err) {
               console.log(err.message);

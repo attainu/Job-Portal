@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs, allJobsAcceptedTillDateByAParticularSeeker, jobsPostedByAParticularProvider }=require("../controllers/getControllers")
+const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs, allJobsAcceptedTillDateByAParticularSeeker, jobsPostedByAParticularProvider, providerAccountActivation, seekerAccountActivation }=require("../controllers/getControllers")
 const {authenticateProvidersToken, authenticateSeekersToken} = require("../middlewares/authenticate")
 
 // -----------------Job Providers Routes-----------------------
@@ -19,7 +19,9 @@ router.get(`/api/jobseeker/searchjobs/bypincode/:pincode/:pagenumber/`, searchJo
 router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/`, authenticateSeekersToken, searchJobById)
 router.get(`/api/jobseeker/searchjobs/bykeyword/:keyword/:pagenumber/`, searchJobByKeyword)
 
-
+// ----------------Account Activation ----------
+router.get(`/api/provideraccountactivation/:tempJwt`,providerAccountActivation)
+router.get(`/api/seekeraccountactivation/:tempJwt`,seekerAccountActivation)
 
 
 // -----------------------Admin Routes---------------------------
