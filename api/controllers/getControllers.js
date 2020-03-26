@@ -2,7 +2,6 @@ const JobDetail = require("../models/Job")
 
 module.exports = {
     searchNotYetAcceptedJobs: function (req, res) {
-
         JobDetail.find({ isAccepted: false })
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)

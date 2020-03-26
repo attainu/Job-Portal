@@ -1,9 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-const { deletingJob }=require("../controllers/deleteControllers")
-const api_key = process.env.api_key
+const { deletingJob, jobProviderLogout, jobSeekerLogout }=require("../controllers/deleteControllers")
+const {authenticateProvidersToken, authenticateSeekersToken} = require("../middlewares/authenticate")
 
-router.delete(`/api/jobprovider/deletingjob/:jobid/${api_key}`, deletingJob)
+router.delete(`/api/jobprovider/deletingjob/:jobid/`, deletingJob)
 
+router.delete(`/api/user/jobprovider/logout/`,authenticateProvidersToken, jobProviderLogout); 
+router.delete(`/api/user/jobseeker/logout/`, authenticateSeekersToken, jobSeekerLogout); 
 
 module.exports=router;
