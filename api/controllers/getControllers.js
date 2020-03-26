@@ -6,9 +6,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ createdAt: -1 })
-            .then((allJobs) => {
+            .then((notYetAcceptedJobs) => {
                 JobDetail.find({})
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'notYetAcceptedJobs': notYetAcceptedJobs }) });
 
             })
             .catch((err) => {
@@ -21,9 +21,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ createdAt: -1 })
-            .then((allJobs) => {
+            .then((categoryJobs) => {
                 JobDetail.find({ category: req.params.category })
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'categoryJobs': categoryJobs }) });
 
             })
             .catch((err) => {
@@ -36,9 +36,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ timestamps: -1 })
-            .then((allJobs) => {
+            .then((cityJobs) => {
                 JobDetail.find({ city: req.params.city })
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'cityJobs': cityJobs }) });
 
             })
             .catch((err) => {
@@ -51,9 +51,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ timestamps: -1 })
-            .then((allJobs) => {
+            .then((pincodeJobs) => {
                 JobDetail.find({ pincode: req.params.pincode })
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'pincodeJobs': pincodeJobs }) });
 
             })
             .catch((err) => {
@@ -76,9 +76,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ timestamps: -1 })
-            .then((allJobs) => {
+            .then((keywordJobs) => {
                 JobDetail.find({ keyword: req.params.keyword })
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'keywordJobs': keywordJobs }) });
             })
             .catch((err) => {
                 console.log(err.message)
@@ -93,7 +93,7 @@ module.exports = {
             .sort({ createdAt: 1 })
             .then((allJobs) => {
                 JobDetail.find({})
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
 
             })
             .catch((err) => {
@@ -107,10 +107,9 @@ module.exports = {
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ createdAt: 1 })
-            .then((allJobs) => {
+            .then((allAcceptedJobs) => {
                 JobDetail.find({})
-                    .count({}, function (err, count) { console.log("COUNT = ", count); res.status(302).json({ 'count': count, 'allJobs': allJobs }) });
-
+                    .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'allAcceptedJobs': allAcceptedJobs }) });
             })
             .catch((err) => {
                 console.log(err.message)
@@ -118,10 +117,37 @@ module.exports = {
             });
     },
     allJobsAcceptedTillDateByAParticularSeeker: function (req, res){
-
+        // JobDetail.find({jobSeekerDetail:req.jobSeeker._id})
+        // .then((seekerJobs)=>res.status(200).json(seekerJobs))
+        // .catch((err) => {
+        //     console.log(err.message)
+        //     return res.status(404).send(err.message)
+        // });
+        JobDetail.find({jobSeekerId:req.jobSeeker._id})
+        .skip(((req.params.pagenumber) - 1) * 5)
+        .limit(5)
+        .sort({ createdAt: 1 })
+        .then((seekerJobs) => {
+            JobDetail.find({jobSeekerId:req.jobSeeker._id})
+                .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'seekerJobs': seekerJobs }) });
+        })
+        .catch((err) => {
+            console.log(err.message)
+            return res.status(404).send(err.message)
+        });
     },
     jobsPostedByAParticularProvider: function (req, res){
-
+        JobDetail.find({jobProviderId:req.jobProvider._id})
+        .skip(((req.params.pagenumber) - 1) * 5)
+        .limit(5)
+        .sort({ createdAt: 1 })
+        .then((providerJobs) => {
+            JobDetail.find({jobProviderId:req.jobProvider._id})
+                .countDocuments({}, function (err, count) { console.log("count = ", count); res.status(302).json({ 'count': count, 'providerJobs': providerJobs }) });
+        })
+        .catch((err) => {
+            console.log(err.message)
+            return res.status(404).send(err.message)
+        });
     }
-
 }

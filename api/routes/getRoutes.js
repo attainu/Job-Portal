@@ -5,12 +5,12 @@ const {authenticateProvidersToken, authenticateSeekersToken} = require("../middl
 
 // -----------------Job Providers Routes-----------------------
 
-router.get(`/api/jobprovider/postedjobs/:pagenumber/`, jobsPostedByAParticularProvider)
+router.get(`/api/jobprovider/postedjobs/:pagenumber/`,authenticateProvidersToken, jobsPostedByAParticularProvider)
 
 
 // -------------------Job Seekers Routes--------------------------------
 
-router.get(`/api/jobseeker/searchjobs/alljobsacceptedtilldate/:pagenumber/`, allJobsAcceptedTillDateByAParticularSeeker )
+router.get(`/api/jobseeker/searchjobs/jobsacceptedtilldate/:pagenumber/`,authenticateSeekersToken, allJobsAcceptedTillDateByAParticularSeeker )
 
 router.get(`/api/jobseeker/searchjobs/notyetaccepted/:pagenumber/`, searchNotYetAcceptedJobs)
 router.get(`/api/jobseeker/searchjobs/bycategory/:category/:pagenumber/`, searchJobsByCategory)
@@ -18,6 +18,7 @@ router.get(`/api/jobseeker/searchjobs/bycity/:city/:pagenumber/`, searchJobsByCi
 router.get(`/api/jobseeker/searchjobs/bypincode/:pincode/:pagenumber/`, searchJobsByPincode)
 router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/`, authenticateSeekersToken, searchJobById)
 router.get(`/api/jobseeker/searchjobs/bykeyword/:keyword/:pagenumber/`, searchJobByKeyword)
+
 
 
 

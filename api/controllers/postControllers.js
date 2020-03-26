@@ -4,13 +4,20 @@ const JobSeekerDetail = require("../models/jobSeeker");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+function jobProviderJobsIncrement(totalPosted){
+         return totalPosted+=1
+}
 
 module.exports = {
   postingJob: function(req, res) {
-    const jobdetail = new JobDetail({ ...req.body });
+    const jobdetail = new JobDetail({ ...req.body, jobProviderId:req.jobProvider._id });
     jobdetail
       .save()
       .then(() => {
+        JobProviderDetail.findById(req.jobProvider._id).then((jobProvider)=>jobProviderJobsIncrement(jobProvider.totalPosted)).then((totalPosted)=>{
+          JobProviderDetail.findByIdAndUpdate(req.jobProvider._id,{totalPosted:totalPosted}
+            ).then(()=>console.log("no. of jobs posted by job provider",totalPosted))
+        })
         console.log("job posted successfully");
         res.status(200).json(jobdetail);
       })
@@ -54,9 +61,6 @@ module.exports = {
         return res.status(400).send("Incorrect credentials");
       JobProviderDetail.findByEmailAndPassword(email, password)
         .then(function(user) {
-          // const accessToken = jwt.sign({_id: user._id }, process.env.ACCESS_TOKEN_SECRET)
-          // user.save()
-          // res.json({accessToken : accessToken})
           jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 1000 * 60 * 10 }, function(err,token) {
             if (err) {
               console.log(err.message);
@@ -75,30 +79,30 @@ module.exports = {
           res.status(403).send("Login Failed");
         });
     }
-    // else {
-    //   var email = req.body.email;
-    //   var password = req.body.password;
-    //   if (!email || !password)
-    //     return res.status(400).send("Incorrect credentials");
-    //   JobSeekerDetail.findByEmailAndPassword(email, password)
-    //     .then(function(user) {
-    //       jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 60 * 1 }, function(err,token) {
-    //         if (err) {
-    //           console.log(err.message);
-    //           return res.status(500).send("Server Error");
-    //         }
-    //         user.jwt=token;
-    //         req.jwt = token
-    //         user.save()            
-    //         console.log(user)
-    //         res.status(200).send(user);
-    //       });
-    //     })
-    //     .catch(function(err) {
-    //       console.log(err.message);
-    //       res.status(403).send("Login Failed");
-    //     });
-    // }
+    else {
+      var email = req.body.email;
+      var password = req.body.password;
+      if (!email || !password)
+        return res.status(400).send("Incorrect credentials");
+      JobSeekerDetail.findByEmailAndPassword(email, password)
+        .then(function(user) {
+          jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 6000 * 60 * 1 }, function(err,token) {
+            if (err) {
+              console.log(err.message);
+              return res.status(500).send("Server Error");
+            }
+            user.jwt=token;
+            req.jwt = token
+            user.save()            
+            console.log(user)
+            res.status(200).send(user);
+          });
+        })
+        .catch(function(err) {
+          console.log(err.message);
+          res.status(403).send("Login Failed");
+        });
+    }
   }
 }
 

@@ -25,7 +25,6 @@ const jwt = require("jsonwebtoken");
 async  authenticateSeekersToken(req, res, next) {
     try {
         const token = req.header('Authorization')
-        console.log(token)
         if (!token) return res.sendStatus(401)
         const payload = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
         console.log("PAYLOAD = ", payload)
@@ -33,7 +32,6 @@ async  authenticateSeekersToken(req, res, next) {
             return res.sendStatus(403)
         }
         const jobSeeker = await JobSeekerDetails.findOne({_id: payload._id, jwt: token})
-        console.log(jobSeeker)
         if(!jobSeeker) return res.sendStatus(401)
         req.jobSeeker = jobSeeker
         next()
