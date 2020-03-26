@@ -70,7 +70,11 @@ const jobDetailSchema = new Schema({
     jobSeekerId: {
         type: Schema.Types.ObjectId,
         ref: 'jobSeekerDetail'
-    }
+    },
+    jobSeekerName:String,
+    jobSeekerContactNumber:Number,
+    jobSeekerAadhaarNumber:Number
+    
 }, { timestamps: true })
 
 const JobDetails = mongoose.model("jobDetail", jobDetailSchema)

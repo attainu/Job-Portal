@@ -17,7 +17,7 @@ const jobProviderSchema = new Schema({
         type: String,
         required: true
     },
-    AadhaarNumber:{
+    aadhaarNumber:{
         type:Number,
         required:true,
         unique:true

@@ -17,7 +17,7 @@ module.exports = {
     },
     isAcceptedJob: function (req, res) {
         console.log(req.params.jobid)
-        JobDetail.findByIdAndUpdate(req.params.jobid, { isAccepted: true , jobSeekerId: req.jobSeeker._id })
+        JobDetail.findByIdAndUpdate(req.params.jobid, { isAccepted: true , jobSeekerId: req.jobSeeker._id,jobSeekerName:req.jobSeeker.name,jobSeekerContactNumber:req.jobSeeker.contactNumber, jobSeekerAadhaarNumber:req.jobSeeker.aadhaarNumber})
             .then(() => {
                 JobSeekerDetail.findById(req.jobSeeker._id)
                     .then((jobSeeker) => jobSeekerJobsIncrement(jobSeeker.totalAccepted))
@@ -29,7 +29,7 @@ module.exports = {
            
     
 
-    //-------------Admin Controlling------------
+    //--------------------Admin Controlling-----------------
 
     updatingAnything: function (req, res) {
         JobDetail.updateMany({}, { isAccepted: false })
