@@ -22,7 +22,7 @@ module.exports = {
         JobDetail.findByIdAndUpdate(req.params.jobid, { isAccepted: true , jobSeekerId: req.jobSeeker._id,jobSeekerName:req.jobSeeker.name,jobSeekerContactNumber:req.jobSeeker.contactNumber, jobSeekerAadhaarNumber:req.jobSeeker.aadhaarNumber})
             .then((job) => {
                 console.log(job);
-                isAcceptedMailToProvider(job.jobProviderEmail,job.title,job.createdAt,job.jobSeekerName);
+                isAcceptedMailToProvider(job.jobProviderEmail,job.title,job.createdAt,req.jobSeeker.name);
                 JobSeekerDetail.findById(req.jobSeeker._id)
                     .then((jobSeeker) => {
                         isAcceptedMailToSeeker(jobSeeker.email,job.title,job.createdAt,job.jobProviderName)

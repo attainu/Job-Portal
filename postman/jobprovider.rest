@@ -66,8 +66,20 @@ Content-Type: application/json
   }
 
 
+###   Uploading Profile Picture
+POST http://localhost:8080/api/jobprovider/uploadprofilepicture
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkZDUyNDgzNTQxNjJjODRmYTc2ODEiLCJpYXQiOjE1ODUzMDUwMDMsImV4cCI6MTU4NTkwNTAwM30.0rOOqL0NZxJ8D-On6bhqBdyUS4zJche7XvfvSwYPKkU
 
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="1.png"
+Content-Type: image/png
+
+< C:\Users\Harish\Desktop\hari.jpeg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ################ UPDATE
+
 
 ###  Job updation by Provider Account
 PATCH http://localhost:8080/api/jobprovider/udpatingjob/:jobid/
@@ -80,6 +92,3 @@ DELETE http://localhost:8080/api/jobprovider/deletingjob/:jobid/
 
 ###  Logging out from Provider Account
 DELETE http://localhost:8080/api/user/jobprovider/logout/
-
-
-

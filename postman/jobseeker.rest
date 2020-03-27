@@ -54,6 +54,11 @@ content-type: application/json
     "role":"Job-Seeker"
 }
 
+###   Uploading Profile Picture
+POST http://localhost:8080/api/jobseeker/uploadprofilepicture
+Content-Type: application/json
+Authorization:
+
 
 ###################  UPDATE
 

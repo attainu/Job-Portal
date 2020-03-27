@@ -31,19 +31,10 @@ const jobDetailSchema = new Schema({
         type: String,
         require: true
     },
-    postedAt: {
-        type: Date,
-        default: Date.now()
-    },
-    timeSlot: {
+   timeSlot: {
         type: String,
         required: true
-    },
-    keyword:[],    
-    jobProviderName: {
-        type: String,
-        required: true
-    },
+    },  
     contactNumber: {
         type: Number,
         required: true
@@ -72,6 +63,9 @@ const jobDetailSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'jobSeekerDetail'
     },
+    keyword:[],    
+    jobProviderName: String,
+    jobProviderEmail: String,
     jobSeekerName:String,
     jobSeekerContactNumber:Number,
     jobSeekerAadhaarNumber:Number
