@@ -9,6 +9,9 @@ GET http://localhost:8080/api/jobprovider/postedjobs/:pagenumber/
 ###  Provider Account Activation
 GET http://localhost:8080/api/provideraccountactivation/:temptoken
 
+###
+GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yODMwMjMzNTcwMjk1ODE1LCJpYXQiOjE1ODUyODQyMDN9.8qZQUqo5LQWoPAfhTyuAyV6Y1_FNjJn8Gm_-98E1BSQ
+
 
 
 
@@ -22,6 +25,13 @@ POST http://localhost:8080/api/user/register
 
 ### Logging into Provider Account
 POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+ {  
+   "email": "harishponna55@gmail.com",
+   "password": "1234",   
+   "role" : "Job-Provider" 
+  }
 
 
 

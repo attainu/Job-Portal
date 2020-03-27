@@ -2,6 +2,9 @@ const JobDetail = require("../models/Job");
 const JobProviderDetail = require("../models/JobProvider");
 const JobSeekerDetail = require("../models/jobSeeker");
 const jwt = require("jsonwebtoken");
+
+const {validationResult} = require("express-validator");
+
 const uuid=require("uuid/v4")
 const sendMailToUser = require("../utils/nodeMailer")
 
@@ -28,9 +31,14 @@ module.exports = {
       });
   },
   userRegister: function(req, res) {
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+      console.log(errors.array());
+      return res.status(422).send("Fatal, Validation Failed...")
+    }
     if (req.body.role == "Job-Provider") {
      const tempJwt=  jwt.sign({id:Math.random()},process.env.TEMP_TOKEN_SECRET)
-      const jobProviderDetail = new JobProviderDetail({ ...req.body,tempJwt:tempToken});
+      const jobProviderDetail = new JobProviderDetail({ ...req.body,tempJwt:tempJwt});
       jobProviderDetail
         .save()
         .then(() => {
