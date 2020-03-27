@@ -7,7 +7,8 @@ GET http://localhost:8080/api/jobprovider/postedjobs/:pagenumber/
 
 
 ###  Provider Account Activation
-GET http://localhost:8080/api/provideraccountactivation/:temptoken
+GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC44MDg4NDEzNjY3ODg2ODA3LCJpYXQiOjE1ODUyODk0MjV9.FJcWuVbJO02M3ci9G86Wc__GT7IQMyNlYDYvTGhGdrg
+
 
 ###
 GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yODMwMjMzNTcwMjk1ODE1LCJpYXQiOjE1ODUyODQyMDN9.8qZQUqo5LQWoPAfhTyuAyV6Y1_FNjJn8Gm_-98E1BSQ
@@ -19,9 +20,40 @@ GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5
 
 ### Posting a job by provider
 POST http://localhost:8080/api/jobprovider/postingjob
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkOThkMTE3YmM3MjFhZDQwOWQ0MGEiLCJpYXQiOjE1ODUyOTMyNzYsImV4cCI6MTU4NTg5MzI3Nn0.Ge8-Ac4llTQzc1A7KkwD3G88sR7ZH9EncxxIRsnrLok
 
+{
+            "category":"hourly",
+            "duration": 5,
+            "title":"calendar tutor",
+            "description":"calendar teaching for my kid",
+            "preferedSkills":"musician",
+            "rateOfPayment":500,
+            "preference":"any",
+			    "timeSlot":"1pm-6pm",
+            "keyword":["calendar", "maths", "cricket", "weaving", "fishing"],
+            "jobProviderName":"Harish",
+            "contactNumber": 8977700000,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "hyderabad chikkadpally"
+        }
 ### Registering Provider Account
 POST http://localhost:8080/api/user/register
+Content-Type: application/json
+
+{
+  	"name": "Harishnna",
+   "email": "harishponna5@gmail.co",
+   "password": "16",
+   "aadhaarNumber" : 1234672,
+   "contactNumber" : 123455589,
+   "address" : "kjhgfdrtyucmo",
+   "profilePicture" : "Abachchan",
+   "role" : "Job-Provider" 
+  }
+
 
 ### Logging into Provider Account
 POST http://localhost:8080/api/user/login
@@ -29,7 +61,7 @@ Content-Type: application/json
 
  {  
    "email": "harishponna55@gmail.com",
-   "password": "1234",   
+   "password": "123456",   
    "role" : "Job-Provider" 
   }
 

@@ -4,7 +4,7 @@
 ###################  GET 
 
 ###  Account Activation
-GET http://localhost:8080/api/seekeraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yMzI2NDM2Mjc0MDA0NzI0LCJpYXQiOjE1ODUyNTg4ODZ9.bkgmyJFD1HWcoOTuCPjYkEPhWBTvua_zodkGfXtOzxc
+GET http://localhost:8080/api/seekeraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC42NzgzNzQxNjU5ODQ0MzQ5LCJpYXQiOjE1ODUyOTc3MTd9.PT2Q0PF0kzB5PDTHh5usoM7A6JIxxob37G5X3SC-PtA
 ### showing all jobs which are available
 GET http://localhost:8080/api/jobseeker/searchjobs/notyetaccepted/1/
 
@@ -33,13 +33,13 @@ POST http://localhost:8080/api/user/register
 content-type: application/json
 
 {
-  	"name": "Harish Ponna",
-    "email":"harishponna55@gmail.com",
-    "password":"12345s6",
-   "aadhaarNumber" : 788788667655564704584859677558,
-   "contactNumber" : 999499967565556675075854888851479,
-   "address" : "hyderabad",
-   "profilePicture" : "hari",
+  	"name": "Siddhida Jha",
+    "email":"jhasiddhida@gmail.com",
+    "password":"123",
+   "aadhaarNumber" :123456789789,
+   "contactNumber" : 1234567891,
+   "address" : "Ranchi abcdefghtikjjh",
+   "profilePicture" : "Siddhi",
    "role" : "Job-Seeker"
 }
 
@@ -49,8 +49,8 @@ POST http://localhost:8080/api/user/login
 content-type: application/json
 
 {
-    "email":"harishponna@gmail.com",
-    "password":"123456",
+    "email":"jhasiddhida@gmail.com",
+    "password":"123",
     "role":"Job-Seeker"
 }
 
@@ -58,7 +58,11 @@ content-type: application/json
 ###################  UPDATE
 
 ###   Job Accepting by Seeker
-PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/:jobid/isaccepted
+PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/5e7dd002e8bc1f031490605a/isaccepted
+Content-Type: application/json
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkYjkzNTdiMDI5MzJjYmNmYWQ5OTUiLCJpYXQiOjE1ODUyOTc3ODgsImV4cCI6MTU4NTY1Nzc4OH0.IXuA4Fof2nMn-ZMOx9wUJE3jTTOrWV8kRjYsB9fEiLQ
+
+
 
 
 ###  Logging out from Seeker Account

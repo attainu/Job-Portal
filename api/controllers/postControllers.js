@@ -2,11 +2,12 @@ const JobDetail = require("../models/Job");
 const JobProviderDetail = require("../models/JobProvider");
 const JobSeekerDetail = require("../models/jobSeeker");
 const jwt = require("jsonwebtoken");
+const Joi = require("@hapi/joi");
 
 const {validationResult} = require("express-validator");
 
 const uuid=require("uuid/v4")
-const sendMailToUser = require("../utils/nodeMailer")
+const {sendMailToUser} = require("../utils/nodeMailer")
 
 function jobProviderJobsIncrement(totalPosted){
          return totalPosted+=1
@@ -14,7 +15,7 @@ function jobProviderJobsIncrement(totalPosted){
 
 module.exports = {
   postingJob: function(req, res) {
-    const jobdetail = new JobDetail({ ...req.body, jobProviderId:req.jobProvider._id });
+    const jobdetail = new JobDetail({ ...req.body, jobProviderId:req.jobProvider._id,jobProviderEmail:req.email,jobProviderName:req.name});
     jobdetail
       .save()
       .then(() => {
@@ -31,11 +32,23 @@ module.exports = {
       });
   },
   userRegister: function(req, res) {
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-      console.log(errors.array());
-      return res.status(422).send("Fatal, Validation Failed...")
-    }
+    // const errors = validationResult(req)
+    // if(!errors.isEmpty()){
+    //   console.log(errors.array());
+    //   return res.status(422).send("Fatal, Validation Failed...")
+    // }
+    const {name, email, password, aadhaarNumber, contactNumber, address, profilePicture, role } = req.body
+    const Schemavalidation = Joi.object({
+      name : Joi.string().min(3).max(30).required(),
+      email : Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+      password : Joi.string().min(3).max(8).required(),
+      aadhaarNumber: Joi.number().required(),
+      contactNumber: Joi.number().required(),
+      address:Joi.string().min(10).max(50).required(),
+    })
+    const {error, result} = Schemavalidation.validate({name : name,email : email, password:password,aadhaarNumber:aadhaarNumber, contactNumber:contactNumber, address:address })
+    if(error) return res.status(422).json({Error:error.message})
+    console.log(result)
     if (req.body.role == "Job-Provider") {
      const tempJwt=  jwt.sign({id:Math.random()},process.env.TEMP_TOKEN_SECRET)
       const jobProviderDetail = new JobProviderDetail({ ...req.body,tempJwt:tempJwt});
@@ -50,7 +63,7 @@ module.exports = {
           console.log(err.message);
           return res.status(403).send(err.message);
         });
-    } else {
+    } else if(req.body.role == "Job-Seeker") {
       const tempJwt=  jwt.sign({id:Math.random()},process.env.TEMP_TOKEN_SECRET)
       const jobSeekerDetail = new JobSeekerDetail({ ...req.body,tempJwt:tempJwt});
       jobSeekerDetail
