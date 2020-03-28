@@ -13,24 +13,23 @@ function jobProviderJobsIncrement(totalPosted) {
 
 module.exports = {
   postingJob: function (req, res) {
-    const { category, duration, title, description, preferedSkills, preference, rateOfPayment, timeSlot, keyword, contactNumber, city, pincode, address } = req.body
+    const { category, duration, title, description, preferedSkills, preference, rateOfPayment, timeSlot, contactNumber, city, pincode, address } = req.body
     const Schemavalidation = Joi.object({
       category: Joi.string().required(),
-      duration: Joi.number().min(1).required(),
+      duration: Joi.number().min(1).max(100).required(),
       title: Joi.string().min(3).max(40).required(),
       description: Joi.string().min(10).max(300).required(),
       preferedSkills: Joi.string().min(3).max(100).required(),
       preference: Joi.string().min(3).max(40).required(),
       rateOfPayment: Joi.number().min(1).max(50000).required(),
       timeSlot: Joi.string().required(),
-      keyword: Joi.string().min(3).required(),
-      contactNumber: Joi.number().min(10).max(12),
+      contactNumber: Joi.number().min(10000000).max(9999999999),
       city: Joi.string().min(3).max(20),
-      pincode: Joi.number().required(),
+      pincode: Joi.number().min(100000).max(999999).required(),
       address: Joi.string().min(15).max(100).required()
 
     })
-    const { error, result } = Schemavalidation.validate({ category: category, duration: duration, title: title, description: description, preferedSkills: preferedSkills, preference: preference, rateOfPayment: rateOfPayment, timeSlot: timeSlot, keyword: keyword, contactNumber: contactNumber, city: city, pincode: pincode, address: address })
+    const { error, result } = Schemavalidation.validate({ category: category, duration: duration, title: title, description: description, preferedSkills: preferedSkills, preference: preference, rateOfPayment: rateOfPayment, timeSlot: timeSlot, contactNumber: contactNumber, city: city, pincode: pincode, address: address })
     if (error) return res.status(422).json({ Error: error.message })
     console.log(result)
     const jobdetail = new JobDetail({ ...req.body, jobProviderId: req.jobProvider._id, jobProviderEmail: req.email, jobProviderName: req.name });
