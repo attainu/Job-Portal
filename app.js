@@ -24,9 +24,9 @@ app.use((req, res,next)=>{
 // ------------------------All Routes--------------------------
 
 app.use(require("./api/routes/getRoutes"))
-// app.use(require("./api/routes/postRoutes"))
-// app.use(require("./api/routes/updateRoutes"))
-// app.use(require("./api/routes/deleteRoutes"))
+app.use(require("./api/routes/postRoutes"))
+app.use(require("./api/routes/updateRoutes"))
+app.use(require("./api/routes/deleteRoutes"))
 
 
 

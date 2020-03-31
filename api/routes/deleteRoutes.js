@@ -11,4 +11,7 @@ router.delete(`/api/user/jobprovider/logout/`,authenticateProvidersToken, userLo
 // -------------------------Job-Seeker Route-----------------------
 router.delete(`/api/user/jobseeker/logout/`, authenticateSeekersToken, userLogout); 
 
+// -------------------------Admin Route-----------------------
+// router.delete(`/api/user/jobseeker/logout/`, authenticateAdminsToken, userLogout); 
+
 module.exports=router;

@@ -1,53 +1,93 @@
-const JobDetail = require("../models/Job")
-const JobSeekerDetail = require("../models/jobSeeker")
-const JobProviderDetail = require("../models/JobProvider")
-const {isAcceptedMailToSeeker,isAcceptedMailToProvider} = require("../utils/nodeMailer")
+const JobDetails = require("../models/Job")
+const JobSeekerDetails = require("../models/JobSeeker")
+const JobProviderDetails = require("../models/JobProvider")
+const { isAcceptedMailToSeeker, isAcceptedMailToProvider } = require("../utils/nodeMailer")
+const { hash } = require("bcryptjs")
+
+const cloudinary = require("../utils/cloudinary")
+const convertBufferToString = require("../utils/convertBufferToString")
 
 function jobSeekerJobsIncrement(totalPosted) {
     return totalPosted += 1
 }
 
 module.exports = {
-    updatingJob: function (req, res) {
-        console.log(req.body);
-        JobDetail.findByIdAndUpdate(req.params.jobid, { ...req.body })
-            .then(() => {
-                console.log("job updated successfully by provider")
-                return res.status(202).send('job updated successfully by provider')
-            })
-            .catch((err) => res.status(304))
+// -------------------Updating Job by Job-Provider---------------
+    async updatingJob(req, res) {
+        try {
+            await JobDetails.findOneAndUpdate({ id: req.params.jobid },{ ...req.body })
+            console.log("job updated successfully by provider")
+            return res.status(202).send('Job updated successfully by Job-Provider')
+        }
+        catch (error) {
+            return res.status(500).send(error.message)
+        }
     },
-    isAcceptedJob: function (req, res) {
-       
-        JobDetail.findByIdAndUpdate(req.params.jobid, { isAccepted: true , jobSeekerId: req.jobSeeker._id,jobSeekerName:req.jobSeeker.name,jobSeekerContactNumber:req.jobSeeker.contactNumber, jobSeekerAadhaarNumber:req.jobSeeker.aadhaarNumber})
-            .then((job) => {
-                console.log(job);
-                isAcceptedMailToProvider(job.jobProviderEmail,job.title,job.createdAt,req.jobSeeker.name);
-                JobSeekerDetail.findById(req.jobSeeker._id)
-                    .then((jobSeeker) => {
-                        isAcceptedMailToSeeker(jobSeeker.email,job.title,job.createdAt,job.jobProviderName)
-                        console.log("mail sent to seeker")
-                        return jobSeekerJobsIncrement(jobSeeker.totalAccepted)
-                    })
-                    .then((totalAccepted) => JobSeekerDetail.findByIdAndUpdate(req.jobSeeker._id, { totalAccepted: totalAccepted }))
-                    .catch((err)=>res.send(err))
-                
-                    console.log("job accepted")
-                return res.status(202).send('job accepted')
-            }) .catch((err) => res.status(304))
-},
+
+    // --------------------Accepting Job by Job Seeker---------------
+    async isAcceptedJob(req, res) {
+        try {
+            var isAccepted = await JobDetails.findOne({isAccepted: false, id: req.params.jobid})
+            if (!isAccepted) return res.send("Job has already been accepted")
+
+            const job = await JobDetails.findOneAndUpdate({ id: req.params.jobid },{ isAccepted: true, jobSeekerId: req.jobSeeker.id, jobSeekerName: req.jobSeeker.name, jobSeekerContactNumber: req.jobSeeker.contactNumber, jobSeekerAadhaarNumber: req.jobSeeker.aadhaarNumber }, {
            
-    
-
-    //--------------------Admin Controlling-----------------
-
-    updatingAnything: function (req, res) {
-        JobDetail.updateMany({}, { isAccepted: false })
-            .then(() => {
-                console.log("job updated successfully by admin")
-                return res.status(202).send('job updated successfully by admin')
             })
-            .catch((err) => res.status(304))
-    },
-}
 
+            isAcceptedMailToProvider(job.jobProviderEmail, job.title, job.createdAt, req.jobSeeker.name);
+            isAcceptedMailToSeeker(req.jobSeeker.email, job.title, job.createdAt, job.jobProviderName);
+
+            const jobSeekerDetails = await JobSeekerDetails.findOne({ id: req.jobSeeker.id })
+            const totalAccepted = jobSeekerJobsIncrement(jobSeekerDetails.totalAccepted);
+            jobSeekerDetails.totalAccepted = totalAccepted;
+            jobSeekerDetails.save()
+            return res.status(202).send("Job accepted successfully")
+        }
+        catch (err) {
+            return res.status(500).send(err.message)
+        }
+    },
+
+    // ---------------------------Uploading Profile-Picture (Job-Provider & Job-Seeker)-----------
+    async uploadProfilePicture(req, res) {
+        try {
+            if (req.jobProvider) { var schema = JobProviderDetails; user = req.jobProvider }
+            if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
+            let imageContent = convertBufferToString(req.file.originalname, req.file.buffer)
+            let imageResponse = await cloudinary.uploader.upload(imageContent)
+            await schema.findOneAndUpdate({ id: user.id }, { profilePicture: imageResponse.secure_url })
+                
+            res.status(202).send("uploaded Profile picture successfully")
+        } catch (error) {
+            return res.status(500).send(error.message)
+        }
+    },
+
+    // ---------------------------Editing Profile (Job-Provider & Job-Seeker)-----------
+    async editProfile(req, res) {
+        try {
+            if (req.jobProvider) { var schema = JobProviderDetails; user = req.jobProvider }
+            if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
+            await schema.findOneAndUpdate({ id: user.id }, { contactNumber: req.body.contactNumber, address: req.body.address })
+            return res.status(202).send("Profile Updated successfully")
+        } catch (error) {
+            return res.status(500).send(error.message)
+        }
+    },
+
+    // ---------------------------Changing Password (Job-Provider & Job-Seeker)-----------
+    async editPassword(req, res) {
+        try {
+            if (req.jobProvider) { var schema = JobProviderDetails; user = req.jobProvider }
+            if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
+            const hashedPassword = await hash(req.body.password, 10)
+            console.log("hashed=", hashedPassword)
+            console.log("user=", user)
+            await schema.update({id: user.id}, { password: hashedPassword })
+            return res.status(202).send("Password changed successfully")
+
+        } catch (error) {
+            return res.status(500).send(error.message)
+        }
+    }
+}

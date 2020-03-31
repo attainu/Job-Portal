@@ -18,9 +18,9 @@ GET http://localhost:8080/api/jobseeker/searchjobs/filter/1?category=hourly
 
 
 ### showing single job by jobId
-GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/1/
+GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/5e7db2c12379083acc9d7456/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkZDlmYTFiYmI1ZjFhYjg2NWQzODUiLCJpYXQiOjE1ODUzMDYyMjMsImV4cCI6MTU4NTY2NjIyM30.ZZPBuKFrQFUzogTjBOSILBtY_9h181di6yHQAYlOv0M
 
 ###  showing jobs accepted by seeker till date
 GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/1

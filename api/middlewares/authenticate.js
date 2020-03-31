@@ -1,5 +1,5 @@
 var JobProviderDetails = require("../models/JobProvider");
-var JobSeekerDetails = require("../models/jobSeeker");
+var JobSeekerDetails = require("../models/JobSeeker");
 const jwt = require("jsonwebtoken");
 
  module.exports = {async authenticateProvidersToken(req, res, next) {
@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
         console.log(token)
         if (!token) return res.sendStatus(401)
         const payload = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-        console.log("PAYLOAD = ", payload)
+        console.log("PAYLOAD Provider = ", payload)
         if (!payload._id) {
             return res.sendStatus(403)
         }
@@ -27,7 +27,7 @@ async  authenticateSeekersToken(req, res, next) {
         const token = req.header('Authorization')
         if (!token) return res.sendStatus(401)
         const payload = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-        console.log("PAYLOAD = ", payload)
+        console.log("PAYLOAD Seeker = ", payload)
         if (!payload._id) {
             return res.sendStatus(403)
         }

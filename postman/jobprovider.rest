@@ -3,12 +3,16 @@
 ################ GET
 
 ###  Provider Account Activation
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yOTY1MDU1MTI3OTY5OTA2NywiaWF0IjoxNTg1NTc0MzkwfQ.MrnU1uXK0EHSF5BpT0Vxyeq-yPwuY5TENZ4zv7s165A?user=Job-Provider
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC43OTM5MDUzOTk4MjM5NDI3LCJpYXQiOjE1ODU2NjE0NzN9.2ptufICD3Ay_WYYulM-pmMGXJDiqhzYPS2eRS4GLsNs
+
+###
+GET https://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4zMzI1MTM1OTQxMjc1OTU2LCJpYXQiOjE1ODU2NjIwNDcsImV4cCI6MTY0NTY2MjA0N30.5eU3DF9Hz8SUpsVBEtTVIcjvQgUUQ_rBeUu2tiw7gSc?user=Job-Provider
 
 ###  Showing provider his own posted jobs
 GET http://localhost:8080/api/jobprovider/jobspostedtilldate/1/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC43OTM5MDUzOTk4MjM5NDI3LCJpYXQiOjE1ODU2NjE0NzN9.2ptufICD3Ay_WYYulM-pmMGXJDiqhzYPS2eRS4GLsNs
+
 
 
 ################ POST
@@ -39,13 +43,13 @@ POST http://localhost:8080/api/user/register
 Content-Type: application/json
 
 {
-  	"name": "Harish Ponna",
-   "email": "harishponna55@gmail.com",
+  	"name": "Niranjan Singh",
+   "email": "niranjan.bisht44@gmail.com",
    "password": "123456",
-   "aadhaarNumber":123456789789,
+   "aadhaarNumber":223344556677,
    "gender":"male",
-   "contactNumber":1234567897,
-   "address":"chikkadpally hyderabad telangana",
+   "contactNumber":9876543210,
+   "address":"Gurugram, UP",
    "role" : "Job-Provider" 
   }
 
