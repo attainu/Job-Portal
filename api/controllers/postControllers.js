@@ -20,13 +20,14 @@ module.exports = {
     try {
       const job = await new JobDetails({ ...req.body })
       console.log("job1", job)
-      job.jobProviderId = req.jobProvider.id;
+      job.jobProviderId = req.jobProvider._id;
       job.jobProviderEmail = req.jobProvider.email;
       job.jobProviderName = req.jobProvider.name;
       job.save();
-      const user = await JobProviderDetails.findOne({ id: req.jobProvider.id });
+      const user = await JobProviderDetails.findById(req.jobProvider._id)
+      console.log(user)
       const totalPosted = jobProviderJobsIncrement(user.totalPosted);
-      JobProviderDetails.findOneAndupdate({ totalPosted: totalPosted },{id: req.jobProvider.id})
+      await JobProviderDetails.findOneAndUpdate({ id: req.jobProvider._id }, { totalPosted: totalPosted })
       console.log("job posted successfully");
       res.status(202).send("job posted successfully");
     }
@@ -54,7 +55,7 @@ module.exports = {
       if (req.body.role == "Job-Provider") { var schema = JobProviderDetails; var userType = "Job-Provider" }
       if (req.body.role == "Job-Seeker") { var schema = JobSeekerDetails; var userType = "Job-Seeker" }
 
-      const activationToken = await jwt.sign({ id: Math.random() }, process.env.TEMP_TOKEN_SECRET, {expiresIn: 1000*1000*60})
+      const activationToken = await jwt.sign({ id: Math.random() }, process.env.TEMP_TOKEN_SECRET, { expiresIn: 1000 * 1000 * 60 })
       const user = await new schema({ ...req.body });
       const hashedPassword = await hash(req.body.password, 10);
       user.password = hashedPassword;
@@ -77,17 +78,17 @@ module.exports = {
       if (!email || !password)
         return res.status(400).send("Incorrect credentials");
 
-      if (req.body.role == "Job-Provider") schema = JobProviderDetails;
-      if (req.body.role == "Job-Seeker") schema = JobSeekerDetails;
-      if (req.body.role == "Admin") schema = AdminDetails;
+      if (req.body.role == "Job-Provider")var schema = JobProviderDetails;
+      if (req.body.role == "Job-Seeker") var schema = JobSeekerDetails;
+      if (req.body.role == "Admin") var schema = AdminDetails;
 
-      const user = await schema.findOne({email});
+      const user = await schema.findOne({ email });
       if (!user) return res.status(400).send("Incorrect credentials");
       const isMatched = compare(password, user.password);
       if (!isMatched) throw new Error("Invalid credentials");
-      if (!user.isVerified) return res.status(401).send("Job Provider not verified, please activate link sent to you through Email");
+      if (!user.isVerified) return res.status(401).send("You are not verified, please activate link sent to you through Email");
       console.log(user)
-      const token = await jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 1000 * 600 * 10 })
+      const token = await jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 1000 * 600 * 100 })
       user.jwt = token;
       user.save()
       return res.status(202).send({ token })
@@ -102,12 +103,12 @@ module.exports = {
     try {
       if (req.body.role == "Job-Provider") schema = JobProviderDetails;
       if (req.body.role == "Job-Seeker") schema = JobSeekerDetails;
-      if(!req.body.role) return res.send("Incorrect Credentials")
-      const user =await schema.findOne({ email: req.body.email, aadhaarNumber: req.body.aadhaarNumber, isVerified: true});
+      if (!req.body.role) return res.send("Incorrect Credentials")
+      const user = await schema.findOne({ email: req.body.email, aadhaarNumber: req.body.aadhaarNumber, isVerified: true });
       console.log(user)
       if (!user) return res.send("Incorrect Credentials or kindly activate your account by visiting the link that has been sent to you")
-      const rawPassword = (Math.floor(Math.random()*100000000)).toString();
-      const hashedPassword = await hash(rawPassword,10)
+      const rawPassword = (Math.floor(Math.random() * 100000000)).toString();
+      const hashedPassword = await hash(rawPassword, 10)
       user.password = hashedPassword;
       user.save();
       forgotPasswordMailing(req.body.email, rawPassword)

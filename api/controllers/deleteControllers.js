@@ -11,9 +11,9 @@ module.exports = {
     // ----------------------Deleting a Posted-Job by Job-Provider------------------------
     async deletingJob(req, res) {
         try {
-            const destroyed = await JobDetails.findOneAndDelete({ id: req.params.jobid });
+            const destroyed = await JobDetails.findOneAndDelete({ _id: req.params.jobid });
             if (!destroyed) throw new Error('Job do not exist(or)deleted already')
-            const jobProviderDetails = await JobProviderDetails.findOne({ id: req.jobProvider.id })
+            const jobProviderDetails = await JobProviderDetails.findOne({ _id: req.jobProvider._id })
             const totalPosted = jobProviderJobsDecrement(jobProviderDetails.totalPosted)
             jobProviderDetails.totalPosted = totalPosted;
             jobProviderDetails.save()
@@ -29,7 +29,7 @@ module.exports = {
             if (req.jobProvider) { var schema = JobProviderDetails; var user = req.jobProvider }
             if (req.jobSeekers) { var schema = JobSeekerDetails; var user = req.jobSeeker }
             if (req.admin) { var schema = AdminDetails; var user = req.admin }
-            await model.update({ id: user.id }, { jwt: null })
+            await schema.findOneAndUpdate({ _id: user._id }, { jwt: null })
             return res.status(202).send("You are successfully logged out");
         } catch (error) {
             res.status(404).send(error.message)

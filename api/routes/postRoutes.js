@@ -8,6 +8,8 @@ const {authenticateProvidersToken, authenticateSeekersToken} = require("../middl
 
 
 
+
+
 //-----------------Job Provider Route-----------------------
 router.post(`/api/jobprovider/postingjob`, authenticateProvidersToken, postingJob);
 

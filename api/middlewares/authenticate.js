@@ -13,9 +13,9 @@ const jwt = require("jsonwebtoken");
             return res.sendStatus(403)
         }
         const jobProvider = await JobProviderDetails.findOne({_id: payload._id, jwt: token})
-        console.log(jobProvider)
         if(!jobProvider) return res.sendStatus(401)
         req.jobProvider = jobProvider
+        console.log(jobProvider)
         next()
     } catch (err) {
         console.log(err)
@@ -39,29 +39,27 @@ async  authenticateSeekersToken(req, res, next) {
         console.log(err)
         res.sendStatus(500)
     }
+},
+async authenticateAdminsToken (req,res,next){
+    try {
+        const token = req.header('Authorization')
+        if (!token) return res.sendStatus(401)
+        const payload = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        console.log("PAYLOAD Seeker = ", payload)
+        if (!payload._id) {
+            return res.sendStatus(403)
+        }
+        const admin = await AdminDetails.findOne({_id: payload._id, jwt: token})
+        if(!admin) return res.sendStatus(401)
+        req.admin = admin
+        next()
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
 }
 
 }
 
-// async function authenticateToken(req, res, next) {
-//     try {
-//         const token = req.header('Authorization')
-//         console.log(token)
-//         if (!token) return res.sendStatus(401)
-//         const payload = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-//         console.log("PAYLOAD = ", payload)
-//         if (!payload._id) {
-//             return res.sendStatus(403)
-//         }
-//         const jobProvider = await JobProvider.findOne({_id: payload._id, jwt: token})
-//         console.log(jobProvider)
-//         if(!jobProvider) return res.sendStatus(401)
-//         req.jobProvider = jobProvider
-//         next()
-//     } catch (err) {
-//         console.log(err)
-//         res.sendStatus(500)
-//     }
-// }
 
 

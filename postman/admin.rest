@@ -1,0 +1,33 @@
+######################### Admin Routes ###############################
+################ GET Routes ####################
+### view all available jobs
+GET http://localhost:8080/api/admin/allavailablejobs/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all accepted jobs
+GET http://localhost:8080/api/admin/allacceptedjobs/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all Providers
+GET http://localhost:8080/api/admin/allproviders/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all seekers
+GET http://localhost:8080/api/admin/allseekers/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+##################### POST Routes ###################
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "name":"admin",
+    "email":"admin@gmail.com",
+    "password":"admin",
+    "role":"Admin"
+}
+
+
+### logout
+DELETE http://localhost:8080/api/admin/logout/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y

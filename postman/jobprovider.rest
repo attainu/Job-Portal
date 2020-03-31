@@ -3,24 +3,34 @@
 ################ GET
 
 ###  Provider Account Activation
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC43OTM5MDUzOTk4MjM5NDI3LCJpYXQiOjE1ODU2NjE0NzN9.2ptufICD3Ay_WYYulM-pmMGXJDiqhzYPS2eRS4GLsNs
-
-###
-GET https://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4zMzI1MTM1OTQxMjc1OTU2LCJpYXQiOjE1ODU2NjIwNDcsImV4cCI6MTY0NTY2MjA0N30.5eU3DF9Hz8SUpsVBEtTVIcjvQgUUQ_rBeUu2tiw7gSc?user=Job-Provider
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4zMzI1MTM1OTQxMjc1OTU2LCJpYXQiOjE1ODU2NjIwNDcsImV4cCI6MTY0NTY2MjA0N30.5eU3DF9Hz8SUpsVBEtTVIcjvQgUUQ_rBeUu2tiw7gSc?user=Job-Provider
 
 ###  Showing provider his own posted jobs
 GET http://localhost:8080/api/jobprovider/jobspostedtilldate/1/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC43OTM5MDUzOTk4MjM5NDI3LCJpYXQiOjE1ODU2NjE0NzN9.2ptufICD3Ay_WYYulM-pmMGXJDiqhzYPS2eRS4GLsNs
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
 
 
 ################ POST
+### Registering Provider Account
+POST http://localhost:8080/api/user/register
+Content-Type: application/json
+
+{
+  	"name": "Harish Ponna",
+   "email": "harishponna54355@gmail.com",
+   "password": "123456",
+   "aadhaarNumber":123416789789,
+   "gender":"male",
+   "contactNumber":1234517797,
+   "address":"chikkadpally hyderabad telangana",
+   "role" : "Job-Provider" 
+  }
 
 ### Posting a job by provider
 POST http://localhost:8080/api/jobprovider/postingjob
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
 
 {
             "category":"hourly",
@@ -38,20 +48,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0
             "pincode": 500060,
             "address": "hyderabad chikkadpally"
         }
-### Registering Provider Account
-POST http://localhost:8080/api/user/register
-Content-Type: application/json
-
-{
-  	"name": "Niranjan Singh",
-   "email": "niranjan.bisht44@gmail.com",
-   "password": "123456",
-   "aadhaarNumber":223344556677,
-   "gender":"male",
-   "contactNumber":9876543210,
-   "address":"Gurugram, UP",
-   "role" : "Job-Provider" 
-  }
 
 
 ### Logging into Provider Account
@@ -60,7 +56,7 @@ Content-Type: application/json
 
  {  
    "email": "harishponna55@gmail.com",
-   "password": "11805549",   
+   "password": "123456",   
    "role" : "Job-Provider" 
   }
 
@@ -77,23 +73,25 @@ Content-Type: application/json
 ################ UPDATE
 
 ###   Uploading Profile Picture
-POST http://localhost:8080/api/jobprovider/uploadprofilepicture
+PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkZDUyNDgzNTQxNjJjODRmYTc2ODEiLCJpYXQiOjE1ODUzMDUwMDMsImV4cCI6MTU4NTkwNTAwM30.0rOOqL0NZxJ8D-On6bhqBdyUS4zJche7XvfvSwYPKkU
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: multipart/form-data; name="image"; filename="1.png"
-Content-Type: image/png
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="hari.jpeg"
+Content-Type: image/jpeg
 
 < C:\Users\Harish\Desktop\hari.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
-
 ###  Job updation by Provider Account
 PATCH http://localhost:8080/api/jobprovider/udpatingjob/1/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTE1NzgyLCJleHAiOjE1OTE1MTU3ODJ9.VU17HbLo3Etxf4QAUVddrMD2gMBg32WZDxeOyzc5y_o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
 
 {
             "category":"yearly",
@@ -110,7 +108,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTE1
             "city": "Hyderabad",
             "pincode": 500060,
             "address": "hyderabad chikkadpally"
-        }
+}
 
 ### updating editing  password 
 PATCH http://localhost:8080/api/jobprovider/editpassword
@@ -121,16 +119,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0
   "password":"1234567890"
 }
 
-
-
 ################ DELETE
 
 ###  Job Deletion by Provider
 DELETE http://localhost:8080/api/jobprovider/deletingjob/4/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTY1MDM5LCJleHAiOjE1OTE1NjUwMzl9.yqt1IE8p8JUo5UZ6FJhGn-Kq0FIiKRVrSy9Ne_LlCMc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
 
 ###  Logging out from Provider Account
-DELETE http://localhost:8080/api/user/jobprovider/logout/
+DELETE http://localhost:8080/api/jobprovider/logout/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk

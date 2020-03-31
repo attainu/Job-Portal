@@ -101,15 +101,12 @@ module.exports = {
     // --------------------Viewing Accepted Jobs by Seeker-----------------
     async allJobsAcceptedTillDateByAParticularSeeker(req, res) {
         try {
-            const jobs = await JobDetails.find({ jobSeekerId: req.jobSeeker.id })
+            const jobs = await JobDetails.find({ jobSeekerId: req.jobSeeker._id })
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ createdAt: -1 });
-            const count = await JobDetails.find({ jobSeekerId: req.jobSeeker.id})
+            const count = await JobDetails.find({ jobSeekerId: req.jobSeeker._id})
             .countDocuments({});
-            console.log("jobs=", jobs)
-            console.log("count=", count)
-        // res.status(200).json({ count,jobs })
             return res.status(200).send({ allJobsAcceptedTillDateByAParticularSeeker: jobs, count: count })
 
         } catch (error) {
@@ -120,15 +117,12 @@ module.exports = {
     // --------------------Viewing Accepted Jobs by Provider-----------------
     async jobsPostedByAParticularProvider(req, res) {
         try {
-            const jobs = await JobDetails.find({jobProviderId: req.jobProvider.id })
+            const jobs = await JobDetails.find({jobProviderId: req.jobProvider._id })
             .skip(((req.params.pagenumber) - 1) * 5)
             .limit(5)
             .sort({ createdAt: -1 });
-            const count = await JobDetails.find({jobProviderId: req.jobProvider.id})
+            const count = await JobDetails.find({jobProviderId: req.jobProvider._id})
             .countDocuments({});
-            console.log("jobs=", jobs)
-            console.log("count=", count)
-        // return res.status(200).json({ count,jobs })
             return res.status(200).send({ allJobsPostedTillDateByAParticularProvider: jobs, count: count })       
         } catch (error) {
             console.log(error.message)
@@ -141,21 +135,21 @@ module.exports = {
         try {
             if (!req.query.user) throw new Error("invalid route")
 
-            else if (req.query.user === "Job-Provider") schema = JobProviderDetails
-            else if (req.query.user === "Job-Seeker") schema = JobSeekerDetails;
+            else if (req.query.user === "Job-Provider") var schema = JobProviderDetails
+            else if (req.query.user === "Job-Seeker") var schema = JobSeekerDetails;
             else throw new Error("invalid route")
             if (!req.params.activationtoken) return res.status(401)
             const payload = await jwt.verify(req.params.activationtoken, process.env.TEMP_TOKEN_SECRET);
             if (payload) {
-                const updated = await schema.findOneAndUpdate({ isVerified: true, activationToken: null }, {activationToken: req.params.activationtoken})               
-                console.log("Account Activation Updated === ", updated);
-                if (updated == undefined) return res.status(202).send("Account activated Successfully");
-                return res.status(304).send("Account already activated")
+                const updated = await schema.findOneAndUpdate( {activationToken: req.params.activationtoken},{ isVerified: true, activationToken: null })               
+                if (updated) return res.status(202).send("Account activated Successfully");
+                return res.send("Account already activated")
             }
             return res.send("Invalid Token")
         }
         catch (err) {
-            res.status(500).send(err.message)
+            console.log(err)
+            res.status(500).send(err)
         }
     } ,
     async allAcceptedJobs(req,res) {
@@ -166,8 +160,6 @@ module.exports = {
                 .sort({ createdAt: -1 });
                 const count = await JobDetails.find({isAccepted: true})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
         } catch (error) {
             return res.status(500).send(error.message)
@@ -175,30 +167,26 @@ module.exports = {
     },
     async allProviders(req,res) {
         try {
-            const jobs = await JobProviderDetails.find({})
+            const jobProviders = await JobProviderDetails.find({isVerified:true})
                 .skip(((req.params.pagenumber) - 1) * 5)
                 .limit(5)
                 .sort({ createdAt: -1 });
                 const count = await JobDetails.find({})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
-                return res.status(200).json({ count,jobs })
+                return res.status(200).json({ count,jobProviders })
         } catch (error) {
             return res.status(500).send(error.message)
         }
     },
     async allSeekers(req,res) {
         try {
-            const jobs = await JobSeekerDetails.find({})
+            const jobSeekers = await JobSeekerDetails.find({isVerified:true})
                 .skip(((req.params.pagenumber) - 1) * 5)
                 .limit(5)
                 .sort({ createdAt: -1 });
                 const count = await JobSeekerDetails.find({})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
-                return res.status(200).json({ count,jobs })
+                return res.status(200).json({ count,jobSeekers })
         } catch (error) {
             return res.status(500).send(error.message)
         }

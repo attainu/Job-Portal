@@ -15,7 +15,7 @@ module.exports = {
 // -------------------Updating Job by Job-Provider---------------
     async updatingJob(req, res) {
         try {
-            await JobDetails.findOneAndUpdate({ id: req.params.jobid },{ ...req.body })
+            await JobDetails.findOneAndUpdate({ id: req.params.jobid,isAccepted:false },{ ...req.body })
             console.log("job updated successfully by provider")
             return res.status(202).send('Job updated successfully by Job-Provider')
         }
@@ -30,14 +30,12 @@ module.exports = {
             var isAccepted = await JobDetails.findOne({isAccepted: false, id: req.params.jobid})
             if (!isAccepted) return res.send("Job has already been accepted")
 
-            const job = await JobDetails.findOneAndUpdate({ id: req.params.jobid },{ isAccepted: true, jobSeekerId: req.jobSeeker.id, jobSeekerName: req.jobSeeker.name, jobSeekerContactNumber: req.jobSeeker.contactNumber, jobSeekerAadhaarNumber: req.jobSeeker.aadhaarNumber }, {
-           
-            })
+            const job = await JobDetails.findOneAndUpdate({ _id: req.params.jobid },{ isAccepted: true, jobSeekerId: req.jobSeeker._id, jobSeekerName: req.jobSeeker.name, jobSeekerContactNumber: req.jobSeeker.contactNumber, jobSeekerAadhaarNumber: req.jobSeeker.aadhaarNumber })
 
             isAcceptedMailToProvider(job.jobProviderEmail, job.title, job.createdAt, req.jobSeeker.name);
             isAcceptedMailToSeeker(req.jobSeeker.email, job.title, job.createdAt, job.jobProviderName);
 
-            const jobSeekerDetails = await JobSeekerDetails.findOne({ id: req.jobSeeker.id })
+            const jobSeekerDetails = await JobSeekerDetails.findOne({ _id: req.jobSeeker._id })
             const totalAccepted = jobSeekerJobsIncrement(jobSeekerDetails.totalAccepted);
             jobSeekerDetails.totalAccepted = totalAccepted;
             jobSeekerDetails.save()
@@ -55,7 +53,7 @@ module.exports = {
             if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
             let imageContent = convertBufferToString(req.file.originalname, req.file.buffer)
             let imageResponse = await cloudinary.uploader.upload(imageContent)
-            await schema.findOneAndUpdate({ id: user.id }, { profilePicture: imageResponse.secure_url })
+            await schema.findOneAndUpdate({ _id: user._id }, { profilePicture: imageResponse.secure_url })
                 
             res.status(202).send("uploaded Profile picture successfully")
         } catch (error) {
@@ -68,7 +66,7 @@ module.exports = {
         try {
             if (req.jobProvider) { var schema = JobProviderDetails; user = req.jobProvider }
             if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
-            await schema.findOneAndUpdate({ id: user.id }, { contactNumber: req.body.contactNumber, address: req.body.address })
+            await schema.findOneAndUpdate({_id: user._id }, { contactNumber: req.body.contactNumber, address: req.body.address })
             return res.status(202).send("Profile Updated successfully")
         } catch (error) {
             return res.status(500).send(error.message)
@@ -83,7 +81,7 @@ module.exports = {
             const hashedPassword = await hash(req.body.password, 10)
             console.log("hashed=", hashedPassword)
             console.log("user=", user)
-            await schema.update({id: user.id}, { password: hashedPassword })
+            await schema.update({_id: user._id}, { password: hashedPassword })
             return res.status(202).send("Password changed successfully")
 
         } catch (error) {

@@ -1,0 +1,276 @@
+###########################   PROVIDER ROUTES   #################
+
+################ GET
+
+###  Provider Account Activation
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4zMzI1MTM1OTQxMjc1OTU2LCJpYXQiOjE1ODU2NjIwNDcsImV4cCI6MTY0NTY2MjA0N30.5eU3DF9Hz8SUpsVBEtTVIcjvQgUUQ_rBeUu2tiw7gSc?user=Job-Provider
+
+###  Showing provider his own posted jobs
+GET http://localhost:8080/api/jobprovider/jobspostedtilldate/1/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
+
+
+################ POST
+### Registering Provider Account
+POST http://localhost:8080/api/user/register
+Content-Type: application/json
+
+{
+  	"name": "Harish Ponna",
+   "email": "harishponna54355@gmail.com",
+   "password": "123456",
+   "aadhaarNumber":123416789789,
+   "gender":"male",
+   "contactNumber":1234517797,
+   "address":"chikkadpally hyderabad telangana",
+   "role" : "Job-Provider" 
+  }
+
+### Posting a job by provider
+POST http://localhost:8080/api/jobprovider/postingjob
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
+
+{
+            "category":"hourly",
+            "duration": 5,
+            "title":"calendar tutor",
+            "description":"calendar teaching for my kid",
+            "preferedSkills":"musician",
+            "rateOfPayment":500,
+            "preference":"any",
+			       "timeSlot":"1pm-6pm",
+            "keyword":"musician",
+            "jobProviderName":"Harish",
+            "contactNumber": 8977700000,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "hyderabad chikkadpally"
+        }
+
+
+### Logging into Provider Account
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+ {  
+   "email": "harishponna55@gmail.com",
+   "password": "123456",   
+   "role" : "Job-Provider" 
+  }
+
+
+### forgot passsword sending system generated password
+POST http://localhost:8080/api/user/forgotpassword
+Content-Type: application/json
+
+{
+  "email":"harishponna55@gmail.com",
+  "role":"Job-Provider",
+  "aadhaarNumber":123456789789
+}
+################ UPDATE
+
+###   Uploading Profile Picture
+PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="hari.jpeg"
+Content-Type: image/jpeg
+
+< C:\Users\Harish\Desktop\hari.jpeg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###  Job updation by Provider Account
+PATCH http://localhost:8080/api/jobprovider/udpatingjob/1/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
+
+{
+            "category":"yearly",
+            "duration": 5,
+            "title":"calendar tutor",
+            "description":"calendar teaching for my kid",
+            "preferedSkills":"musician",
+            "rateOfPayment":500,
+            "preference":"any",
+			       "timeSlot":"1pm-6pm",
+            "keyword":"cricket",
+            "jobProviderName":"Harish",
+            "contactNumber": 8977700000,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "hyderabad chikkadpally"
+}
+
+### updating editing  password 
+PATCH http://localhost:8080/api/jobprovider/editpassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
+
+{
+  "password":"1234567890"
+}
+
+################ DELETE
+
+###  Job Deletion by Provider
+DELETE http://localhost:8080/api/jobprovider/deletingjob/4/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
+
+###  Logging out from Provider Account
+DELETE http://localhost:8080/api/jobprovider/logout/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5NzE0LCJleHAiOjE1OTE2ODk3MTR9.yWdr7vWRTxZ5ITao5jLLTTKGzatsSVZq89I4wPWF4Mk
+
+
+
+#######################################  SEEKER ROUTES   ###################################3
+
+###################  GET 
+
+###  Account Activation
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xNzU3NDg2Nzg4NjQ0NjkzMiwiaWF0IjoxNTg1NjkwMjEyfQ.OlKKEDbHysec4Nz7SpN3zF-vfkiB_9jV099gCbNblOI?user=Job-Seeker
+
+### showing all jobs which are available
+GET http://localhost:8080/api/jobseeker/searchjobs/allavailablejobs/1/
+
+### filtering jobs by category of hourly, daily, weekly, monthly
+
+GET http://localhost:8080/api/jobseeker/searchjobs/filter/1?category=hourly
+
+
+
+### showing single job by jobId
+GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/1/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+###  showing jobs accepted by seeker till date
+GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+###################  POST
+
+###   Register Seeker Account
+POST http://localhost:8080/api/user/register
+content-type: application/json
+
+{
+  	"name": "Siddhida",
+    "email":"jhasiddhidda@gmail.com",
+    "password":"123456",
+   "aadhaarNumber" :124411789789,
+  "gender":"female",
+   "contactNumber" : 1234167391,
+   "address" : "Ranchi abcdefghtikjjh",
+   "role" : "Job-Seeker"
+}
+
+
+###   Login into Seeker Account
+POST http://localhost:8080/api/user/login
+content-type: application/json
+
+{
+    "email":"jhasiddhida@gmail.com",
+    "password":"123456",
+    "role":"Job-Seeker"
+}
+
+### forgot passsword sending system generated password
+POST http://localhost:8080/api/user/forgotpassword
+Content-Type: application/json
+
+{
+  "email":"jhasiddhida@gmail.com",
+  "role":"Job-Seeker",
+  "aadhaarNumber":123456789789
+}
+
+###   Uploading Profile Picture
+PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="hari.jpeg"
+Content-Type: image/jpeg
+
+< C:\Users\Harish\Desktop\hari.jpeg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###################  UPDATE
+##### Edit password
+PATCH http://localhost:8080/api/jobseeker/editpassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+{
+  "password":"1234567890"
+}
+###   Job Accepting by Seeker
+PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/1/isaccepted
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+### udpating profile
+PATCH http://localhost:8080/api/jobseeker/editprofile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
+
+{
+  "contactNumber" : 8977777777,
+   "address" : "Jharkhand abcdefghtikjjh"
+}
+###  Logging out from Seeker Account
+DELETE http://localhost:8080/api/jobseeker/logout
+
+
+
+######################### Admin Routes ###############################
+################ GET Routes ####################
+### view all available jobs
+GET http://localhost:8080/api/admin/allavailablejobs/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all accepted jobs
+GET http://localhost:8080/api/admin/allacceptedjobs/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all Providers
+GET http://localhost:8080/api/admin/allproviders/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+### view all seekers
+GET http://localhost:8080/api/admin/allseekers/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y
+
+##################### POST Routes ###################
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "name":"admin",
+    "email":"admin@gmail.com",
+    "password":"admin",
+    "role":"Admin"
+}
+
+
+### logout
+DELETE http://localhost:8080/api/admin/logout/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1Njg5MDU1LCJleHAiOjE1OTE2ODkwNTV9._4ck3Ck_XS3sR-hqLNeaib4kdTGPRHKcIujNHVIIe0Y

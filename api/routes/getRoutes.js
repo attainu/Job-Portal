@@ -13,13 +13,13 @@ const {
     allSeekers
 } = require("../controllers/getControllers")
 
-const { authenticateProvidersToken, authenticateSeekersToken } = require("../middlewares/authenticate")
+const { authenticateProvidersToken, authenticateSeekersToken, authenticateAdminsToken } = require("../middlewares/authenticate")
 
 // --------------------------Admin------------------------------------------
-router.get(`/api/admin/allacceptedjobs`, allAcceptedJobs)
-router.get(`/api/admin/allavailablejobs`, allAvailableJobs)
-router.get(`/api/admin/allproviders`, allProviders)
-router.get(`/api/admin/allseekers`, allSeekers)
+router.get(`/api/admin/allavailablejobs/:pagenumber`, authenticateAdminsToken, allAvailableJobs)
+router.get(`/api/admin/allacceptedjobs/:pagenumber`,authenticateAdminsToken, allAcceptedJobs)
+router.get(`/api/admin/allproviders/:pagenumber`, authenticateAdminsToken, allProviders)
+router.get(`/api/admin/allseekers/:pagenumber`, authenticateAdminsToken, allSeekers)
 
 
  // ----------------Account Activation (Job-Provider & Job-Seeker)----------

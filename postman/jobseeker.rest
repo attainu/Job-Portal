@@ -4,12 +4,10 @@
 ###################  GET 
 
 ###  Account Activation
-GET http://localhost:8080/api/seekeraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC42OTIzNDMwNTk4MDE0ODU1LCJpYXQiOjE1ODU1NjM4MjZ9.WJvs_M-dsrzfwkuZSXjIhMToG2lltE5P15SyzY7kk_Q
-###
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xMjA3MDY1NjUwMjI3NDg1NywiaWF0IjoxNTg1NTc1MDA4fQ._uxSjqULuhq90hfxxn4ZhbLh8by6pZaU3R2UPFRUaTw?user=Job-Seeker
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xNzU3NDg2Nzg4NjQ0NjkzMiwiaWF0IjoxNTg1NjkwMjEyfQ.OlKKEDbHysec4Nz7SpN3zF-vfkiB_9jV099gCbNblOI?user=Job-Seeker
 
 ### showing all jobs which are available
-GET http://localhost:8080/api/jobseeker/searchjobs/notyetaccepted/1/
+GET http://localhost:8080/api/jobseeker/searchjobs/allavailablejobs/1/
 
 ### filtering jobs by category of hourly, daily, weekly, monthly
 
@@ -18,9 +16,9 @@ GET http://localhost:8080/api/jobseeker/searchjobs/filter/1?category=hourly
 
 
 ### showing single job by jobId
-GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/5e7db2c12379083acc9d7456/
+GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/1/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkZDlmYTFiYmI1ZjFhYjg2NWQzODUiLCJpYXQiOjE1ODUzMDYyMjMsImV4cCI6MTU4NTY2NjIyM30.ZZPBuKFrQFUzogTjBOSILBtY_9h181di6yHQAYlOv0M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
 
 ###  showing jobs accepted by seeker till date
 GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/1
@@ -35,9 +33,9 @@ content-type: application/json
 
 {
   	"name": "Siddhida",
-    "email":"jhasiddhida@gmail.com",
+    "email":"jhasiddhidda@gmail.com",
     "password":"123456",
-   "aadhaarNumber" :124451789789,
+   "aadhaarNumber" :124411789789,
   "gender":"female",
    "contactNumber" : 1234167391,
    "address" : "Ranchi abcdefghtikjjh",
@@ -60,8 +58,8 @@ POST http://localhost:8080/api/user/forgotpassword
 Content-Type: application/json
 
 {
-  "email":"harishponna55@gmail.com",
-  "role":"Job-Provider",
+  "email":"jhasiddhida@gmail.com",
+  "role":"Job-Seeker",
   "aadhaarNumber":123456789789
 }
 
@@ -82,7 +80,14 @@ Content-Type: image/jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###################  UPDATE
+##### Edit password
+PATCH http://localhost:8080/api/jobseeker/editpassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1MTI3LCJleHAiOjE1OTE1NzUxMjd9.cPBpN-8uFH1AF4axWOgy0y3VXuiVJRMMhCV9lSijDM4
 
+{
+  "password":"1234567890"
+}
 ###   Job Accepting by Seeker
 PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/1/isaccepted
 Content-Type: application/json
@@ -98,4 +103,4 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc1
    "address" : "Jharkhand abcdefghtikjjh"
 }
 ###  Logging out from Seeker Account
-DELETE http://localhost:8080/api/user/jobseeker/logout
+DELETE http://localhost:8080/api/jobseeker/logout
