@@ -2,18 +2,13 @@
 
 ################ GET
 
-###  Showing provider his own posted jobs
-GET http://localhost:8080/api/jobprovider/postedjobs/:pagenumber/
-
-
 ###  Provider Account Activation
-GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC44MDg4NDEzNjY3ODg2ODA3LCJpYXQiOjE1ODUyODk0MjV9.FJcWuVbJO02M3ci9G86Wc__GT7IQMyNlYDYvTGhGdrg
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yOTY1MDU1MTI3OTY5OTA2NywiaWF0IjoxNTg1NTc0MzkwfQ.MrnU1uXK0EHSF5BpT0Vxyeq-yPwuY5TENZ4zv7s165A?user=Job-Provider
 
-
-###
-GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4yODMwMjMzNTcwMjk1ODE1LCJpYXQiOjE1ODUyODQyMDN9.8qZQUqo5LQWoPAfhTyuAyV6Y1_FNjJn8Gm_-98E1BSQ
-
-
+###  Showing provider his own posted jobs
+GET http://localhost:8080/api/jobprovider/jobspostedtilldate/1/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
 
 
 ################ POST
@@ -21,7 +16,7 @@ GET http://localhost:8080/api/provideraccountactivation/eyJhbGciOiJIUzI1NiIsInR5
 ### Posting a job by provider
 POST http://localhost:8080/api/jobprovider/postingjob
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkOThkMTE3YmM3MjFhZDQwOWQ0MGEiLCJpYXQiOjE1ODUyOTMyNzYsImV4cCI6MTU4NTg5MzI3Nn0.Ge8-Ac4llTQzc1A7KkwD3G88sR7ZH9EncxxIRsnrLok
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
 
 {
             "category":"hourly",
@@ -31,8 +26,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkOThkMTE3YmM3
             "preferedSkills":"musician",
             "rateOfPayment":500,
             "preference":"any",
-			    "timeSlot":"1pm-6pm",
-            "keyword":["calendar", "maths", "cricket", "weaving", "fishing"],
+			       "timeSlot":"1pm-6pm",
+            "keyword":"musician",
             "jobProviderName":"Harish",
             "contactNumber": 8977700000,
             "city": "Hyderabad",
@@ -44,13 +39,13 @@ POST http://localhost:8080/api/user/register
 Content-Type: application/json
 
 {
-  	"name": "Harishnna",
-   "email": "harishponna5@gmail.co",
-   "password": "16",
-   "aadhaarNumber" : 1234672,
-   "contactNumber" : 123455589,
-   "address" : "kjhgfdrtyucmo",
-   "profilePicture" : "Abachchan",
+  	"name": "Harish Ponna",
+   "email": "harishponna55@gmail.com",
+   "password": "123456",
+   "aadhaarNumber":123456789789,
+   "gender":"male",
+   "contactNumber":1234567897,
+   "address":"chikkadpally hyderabad telangana",
    "role" : "Job-Provider" 
   }
 
@@ -61,10 +56,21 @@ Content-Type: application/json
 
  {  
    "email": "harishponna55@gmail.com",
-   "password": "123456",   
+   "password": "11805549",   
    "role" : "Job-Provider" 
   }
 
+
+### forgot passsword sending system generated password
+POST http://localhost:8080/api/user/forgotpassword
+Content-Type: application/json
+
+{
+  "email":"harishponna55@gmail.com",
+  "role":"Job-Provider",
+  "aadhaarNumber":123456789789
+}
+################ UPDATE
 
 ###   Uploading Profile Picture
 POST http://localhost:8080/api/jobprovider/uploadprofilepicture
@@ -73,22 +79,54 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTdkZDUyNDgzNTQx
 
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="1.png"
+Content-Disposition: multipart/form-data; name="image"; filename="1.png"
 Content-Type: image/png
 
 < C:\Users\Harish\Desktop\hari.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-################ UPDATE
 
 
 ###  Job updation by Provider Account
-PATCH http://localhost:8080/api/jobprovider/udpatingjob/:jobid/
+PATCH http://localhost:8080/api/jobprovider/udpatingjob/1/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTE1NzgyLCJleHAiOjE1OTE1MTU3ODJ9.VU17HbLo3Etxf4QAUVddrMD2gMBg32WZDxeOyzc5y_o
+
+{
+            "category":"yearly",
+            "duration": 5,
+            "title":"calendar tutor",
+            "description":"calendar teaching for my kid",
+            "preferedSkills":"musician",
+            "rateOfPayment":500,
+            "preference":"any",
+			       "timeSlot":"1pm-6pm",
+            "keyword":"cricket",
+            "jobProviderName":"Harish",
+            "contactNumber": 8977700000,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "hyderabad chikkadpally"
+        }
+
+### updating editing  password 
+PATCH http://localhost:8080/api/jobprovider/editpassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws
+
+{
+  "password":"1234567890"
+}
+
 
 
 ################ DELETE
 
 ###  Job Deletion by Provider
-DELETE http://localhost:8080/api/jobprovider/deletingjob/:jobid/
+DELETE http://localhost:8080/api/jobprovider/deletingjob/4/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTY1MDM5LCJleHAiOjE1OTE1NjUwMzl9.yqt1IE8p8JUo5UZ6FJhGn-Kq0FIiKRVrSy9Ne_LlCMc
 
 ###  Logging out from Provider Account
 DELETE http://localhost:8080/api/user/jobprovider/logout/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg1NTc0OTYzLCJleHAiOjE1OTE1NzQ5NjN9.RK43Yvt3hcJ8tkUYY9V7iq7qSRnx1mQ_enYFBUFyMws

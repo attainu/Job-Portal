@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const bcrypt = require("bcryptjs")
-const joi = require("joi")
 
 const jobSeekerSchema = new Schema({
     name: {
@@ -22,6 +21,10 @@ const jobSeekerSchema = new Schema({
         required:true,
         unique:true
     },
+    gender:{
+      type:String,
+      required:true
+    },
     contactNumber:{
         type:Number,
         required:true
@@ -31,7 +34,8 @@ const jobSeekerSchema = new Schema({
         required:true
     },
     profilePicture: {
-        type: String
+        type: String,
+        required:false
     },
     role: {
         type: String,
@@ -43,10 +47,11 @@ const jobSeekerSchema = new Schema({
     },
     jwt:{
       type:String,
-      default:""
+      default:null
     },
-    tempJwt:{
+    activationToken:{
       type:String,
+      required:false
       },
     isVerified:{
       type:Boolean,

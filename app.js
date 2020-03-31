@@ -8,6 +8,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
+
+// ---------------------Removing CORS error-----------------------
+
 app.use((req, res,next)=>{
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
@@ -18,10 +21,12 @@ app.use((req, res,next)=>{
     next()
   })
 
-app.use(require("./api/routes/postRoutes"))
+// ------------------------All Routes--------------------------
+
 app.use(require("./api/routes/getRoutes"))
-app.use(require("./api/routes/deleteRoutes"))
-app.use(require("./api/routes/updateRoutes"))
+// app.use(require("./api/routes/postRoutes"))
+// app.use(require("./api/routes/updateRoutes"))
+// app.use(require("./api/routes/deleteRoutes"))
 
 
 

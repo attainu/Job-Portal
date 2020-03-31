@@ -1,36 +1,34 @@
 const { Router } = require("express");
 const router = Router();
-const { searchNotYetAcceptedJobs, searchJobsByCategory,searchJobsByCity, searchJobsByPincode, searchJobById, searchJobByKeyword, searchAllJobs,searchAcceptedJobs, allJobsAcceptedTillDateByAParticularSeeker, jobsPostedByAParticularProvider, providerAccountActivation, seekerAccountActivation }=require("../controllers/getControllers")
-const {authenticateProvidersToken, authenticateSeekersToken} = require("../middlewares/authenticate")
 
-// -----------------Job Providers Routes-----------------------
+const {
+    searchNotYetAcceptedJobs,
+    searchJobById,
+    allJobsAcceptedTillDateByAParticularSeeker,
+    jobsPostedByAParticularProvider,
+    accountActivation,
+    filterJobs
+} = require("../controllers/getControllers")
 
-router.get(`/api/jobprovider/postedjobs/:pagenumber/`,authenticateProvidersToken, jobsPostedByAParticularProvider)
+const { authenticateProvidersToken, authenticateSeekersToken } = require("../middlewares/authenticate")
 
 
-// -------------------Job Seekers Routes--------------------------------
 
-router.get(`/api/jobseeker/searchjobs/jobsacceptedtilldate/:pagenumber/`,authenticateSeekersToken, allJobsAcceptedTillDateByAParticularSeeker )
+// // ----------------Account Activation (Job-Provider & Job-Seeker)----------
+// router.get(`/api/accountactivation/:activationtoken`, accountActivation)   // ?user=Job-Provider or Job-Seeker
 
+
+// // -------------------Job Seekers Routes--------------------------------
 router.get(`/api/jobseeker/searchjobs/notyetaccepted/:pagenumber/`, searchNotYetAcceptedJobs)
-router.get(`/api/jobseeker/searchjobs/bycategory/:category/:pagenumber/`, searchJobsByCategory)
-router.get(`/api/jobseeker/searchjobs/bycity/:city/:pagenumber/`, searchJobsByCity)
-router.get(`/api/jobseeker/searchjobs/bypincode/:pincode/:pagenumber/`, searchJobsByPincode)
-router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/`, authenticateSeekersToken, searchJobById)
-router.get(`/api/jobseeker/searchjobs/bykeyword/:keyword/:pagenumber/`, searchJobByKeyword)
-
-// ----------------Account Activation ----------
-router.get(`/api/provideraccountactivation/:tempJwt`,providerAccountActivation)
-router.get(`/api/seekeraccountactivation/:tempJwt`,seekerAccountActivation)
+// router.get(`/api/jobseeker/searchjobs/filter/:pagenumber`, filterJobs)  // ?query=(search by category, city, pinCode, keyword, preference)
+// router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/`, authenticateSeekersToken, searchJobById)
+// router.get(`/api/jobseeker/jobsacceptedtilldate/:pagenumber/`, authenticateSeekersToken, allJobsAcceptedTillDateByAParticularSeeker)
 
 
-// -----------------------Admin Routes---------------------------
-
-router.get(`/api/admin/searchjobs/alljobs/:pagenumber/`, searchAllJobs)
-router.get(`/api/admin/searchjobs/acceptedjobs/:pagenumber/`, searchAcceptedJobs)
-router.get(`/api/admin/searchjobs/notyetaccepted/:pagenumber/`, searchNotYetAcceptedJobs)
+// // -----------------Job Provider Routes-----------------------
+// router.get(`/api/jobprovider/jobspostedtilldate/:pagenumber/`, authenticateProvidersToken, jobsPostedByAParticularProvider)
 
 
 
-module.exports=router;
+module.exports = router;
 

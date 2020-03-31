@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
-const joi = require("joi")
 
 const jobDetailSchema = new Schema({
     category: {
@@ -51,24 +50,39 @@ const jobDetailSchema = new Schema({
         type:String,
         required:true
     },
-    isAccepted:{
-        type:Boolean,
-        default:false
-    },
+    keyword:[],    
     jobProviderId:{ 
         type: Schema.Types.ObjectId,
         ref: 'jobProviderDetail' 
+    },
+    jobProviderName: {
+        type: String,
+        required:false
+    },
+    jobProviderEmail: {
+        type: String,
+        required:false
+    },
+    isAccepted:{
+        type:Boolean,
+        default:false
     },
     jobSeekerId: {
         type: Schema.Types.ObjectId,
         ref: 'jobSeekerDetail'
     },
-    keyword:[],    
-    jobProviderName: String,
-    jobProviderEmail: String,
-    jobSeekerName:String,
-    jobSeekerContactNumber:Number,
-    jobSeekerAadhaarNumber:Number
+    jobSeekerName: {
+        type: String,
+        required:false
+    },
+    jobSeekerContactNumber: {
+        type: Number,
+        required:false
+    },
+    jobSeekerAadhaarNumber: {
+        type: Number,
+        required:false
+    }
     
 }, { timestamps: true })
 
