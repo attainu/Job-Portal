@@ -27,7 +27,7 @@ module.exports = {
       const user = await JobProviderDetails.findById(req.jobProvider._id)
       console.log(user)
       const totalPosted = jobProviderJobsIncrement(user.totalPosted);
-      await JobProviderDetails.findOneAndUpdate({ id: req.jobProvider._id }, { totalPosted: totalPosted })
+      await JobProviderDetails.findOneAndUpdate({ id: req.jobProvider._id, isBlocked: false }, { totalPosted: totalPosted })
       console.log("job posted successfully");
       res.status(202).send("job posted successfully");
     }

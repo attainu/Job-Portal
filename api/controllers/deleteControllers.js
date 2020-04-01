@@ -11,7 +11,7 @@ module.exports = {
     // ----------------------Deleting a Posted-Job by Job-Provider------------------------
     async deletingJob(req, res) {
         try {
-            const destroyed = await JobDetails.findOneAndDelete({ _id: req.params.jobid });
+            const destroyed = await JobDetails.findOneAndDelete({ _id: req.params.jobid,isBlocked: false });
             if (!destroyed) throw new Error('Job do not exist(or)deleted already')
             const jobProviderDetails = await JobProviderDetails.findOne({ _id: req.jobProvider._id })
             const totalPosted = jobProviderJobsDecrement(jobProviderDetails.totalPosted)

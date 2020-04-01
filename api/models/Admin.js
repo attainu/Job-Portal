@@ -22,7 +22,7 @@ const AdminSchema = new Schema({
     type:Boolean,
     default:false
   },
-  idBlocked:{
+  isBlocked:{
     type:Boolean,
     default:false
   }

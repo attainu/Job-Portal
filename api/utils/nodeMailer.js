@@ -19,7 +19,7 @@ function sendMailToUser(user,email,activationToken) {
         from: process.env.GMAIL,
         to: email,
         subject: 'Email verification required for authenticating your Registration on SeasonalEmployment.com',
-        html: `Click on this link to activate your account https://localhost:8080/api/accountactivation/${activationToken}?user=${user}`,
+        html: `Click on this link to activate your account http://localhost:8080/api/accountactivation/${activationToken}?user=${user}`,
     }).then((response) => {
         console.log(response);
     }).catch((err) => console.log(err.message))

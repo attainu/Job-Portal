@@ -14,6 +14,7 @@ const jwt = require("jsonwebtoken");
             return res.sendStatus(403)
         }
         const jobProvider = await JobProviderDetails.findOne({_id: payload._id, jwt: token})
+        if (jobProvider.isBlocked) return res.status(401).send(`${jobProvider.name}, you are blocked for the misuse of SeasonalEmployment.com.....`);
         if(!jobProvider) return res.sendStatus(401)
         req.jobProvider = jobProvider
         console.log(jobProvider)
@@ -33,6 +34,7 @@ async  authenticateSeekersToken(req, res, next) {
             return res.sendStatus(403)
         }
         const jobSeeker = await JobSeekerDetails.findOne({_id: payload._id, jwt: token})
+        if (jobSeeker.isBlocked) return res.status(401).send(`${jobSeeker.name}, you are blocked for the misuse of SeasonalEmployment.com.....`);
         if(!jobSeeker) return res.sendStatus(401)
         req.jobSeeker = jobSeeker
         next()
@@ -51,6 +53,7 @@ async authenticateAdminsToken (req,res,next){
             return res.sendStatus(403)
         }
         const admin = await AdminDetails.findOne({_id: payload._id, jwt: token})
+        if (admin.isBlocked) return res.status(401).send(`${admin.name}, you are blocked for the misuse of SeasonalEmployment.com.....`);
         if(!admin) return res.sendStatus(401)
         req.admin = admin
         next()
