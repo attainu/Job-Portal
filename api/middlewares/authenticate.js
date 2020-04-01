@@ -1,5 +1,6 @@
 var JobProviderDetails = require("../models/JobProvider");
 var JobSeekerDetails = require("../models/JobSeeker");
+var AdminDetails = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 
  module.exports = {async authenticateProvidersToken(req, res, next) {
