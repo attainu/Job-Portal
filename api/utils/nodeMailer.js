@@ -14,12 +14,12 @@ const transport = nodemailer.createTransport({
 transport.verify().then((res) => console.log(res))
 
 
-function sendMailToUser(user,email,tempToken) {
+function sendMailToUser(user,email,activationToken) {
     transport.sendMail({
         from: process.env.GMAIL,
         to: email,
         subject: 'Email verification required for authenticating your Registration on SeasonalEmployment.com',
-        html: `Click on this link to activate your account https://localhost:8080/api/${user}accountactivation/${tempToken}`,
+        html: `Click on this link to activate your account https://localhost:8080/api/accountactivation/${activationToken}?user=${user}`,
     }).then((response) => {
         console.log(response);
     }).catch((err) => console.log(err.message))
@@ -49,5 +49,16 @@ function isAcceptedMailToSeeker(emailSeeker,title,postedOn,providerName) {
     }).catch((err) => console.log(err.message))
 }
 
+function forgotPasswordMailing(email,password) {
+    transport.sendMail({
+        from: process.env.GMAIL,
+        to: email,
+        subject: `System generated password for for logging In on SeasonalEmployment.com`,
+        html: `<p>This password is system generated password to login into your account on <b>SeasonalEmployment.com</b>. Please Login and change your password in profile section.</p>
+        <h3>Password: ${password}`
+    }).then((response) => {
+        console.log(response);
+    }).catch((err) => console.log(err.message))
+}
 
-module.exports={sendMailToUser, isAcceptedMailToProvider, isAcceptedMailToSeeker};
+module.exports={sendMailToUser, isAcceptedMailToProvider, isAcceptedMailToSeeker, forgotPasswordMailing};

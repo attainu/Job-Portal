@@ -82,6 +82,10 @@ const jobDetailSchema = new Schema({
     jobSeekerAadhaarNumber: {
         type: Number,
         required:false
+    },
+    isBlocked:{
+        type:Boolean,
+        default:false
     }
     
 }, { timestamps: true })

@@ -1,14 +1,21 @@
 const { Router } = require("express");
 const router = Router();
 const upload = require("../utils/multer")
-const { authenticateProvidersToken, authenticateSeekersToken } = require("../middlewares/authenticate")
+const { authenticateProvidersToken, authenticateSeekersToken ,authenticateAdminsToken} = require("../middlewares/authenticate")
 const {
     updatingJob,
     isAcceptedJob,
     uploadProfilePicture,
     editProfile,
     editPassword,
+    blocking
 } = require("../controllers/updateControllers")
+
+
+// ------------------------ Admin Route--------------------------------- 
+router.patch(`/api/admin/:id/isblocked`, authenticateAdminsToken, blocking) //?model=Job-Provider or Job-seeker or Job
+
+
 
 // ----------------------------Job Provider Routes-------------------
 router.patch(`/api/jobprovider/udpatingjob/:jobid/`, authenticateProvidersToken, updatingJob)

@@ -13,6 +13,18 @@ const AdminSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  jwt:{
+    type: String,
+    required: false
+  },
+  isVerified:{
+    type:Boolean,
+    default:false
+  },
+  idBlocked:{
+    type:Boolean,
+    default:false
   }
 });
 
