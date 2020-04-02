@@ -98,6 +98,10 @@ module.exports = {
             else return res.send("please input valid query in route");
             const update = await schema.findOneAndUpdate({_id:req.params.id},{isBlocked:true});
             if(!update) res.send("Invalid Id");
+            if(req.query.model==="Job-Provider") {
+                var schema = JobDetails;
+                const Obj = await schema.updateMany({jobProviderId:req.params.id},{isBlocked:true})
+            }
             return res.status(202).send("Blocked Succesfully")
         } catch (error) {
             console.log(error)
