@@ -19,113 +19,111 @@ Project done by Siddhida and Harish Ponna
  1. PROVIDER's ROUTES  
 
        * Registering Provider Account
-              POST http://localhost:8080/api/user/register
+          > POST http://localhost:8080/api/user/register
 
        *  Provider Account Activation
-                GET http://localhost:8080/api/accountactivation/{Activation-Token}?user={Role}
+          > GET http://localhost:8080/api/accountactivation/{Activation-Token}?user={Role}
 
        * Logging into Provider Account
-                POST http://localhost:8080/api/user/login/
+          > POST http://localhost:8080/api/user/login/
 
        * Posting a job by provider
-                POST http://localhost:8080/api/jobprovider/postingjob
+          > POST http://localhost:8080/api/jobprovider/postingjob
 
        * Showing provider his own posted jobs
-                GET http://localhost:8080/api/jobprovider/jobspostedtilldate/{Page Number}/
+          > GET http://localhost:8080/api/jobprovider/jobspostedtilldate/{Page Number}/
 
        * Job updation by Provider Account
-                PATCH http://localhost:8080/api/jobprovider/udpatingjob/{Job Id}/
+          > PATCH http://localhost:8080/api/jobprovider/udpatingjob/{Job Id}/
  
        *  Job Deletion by Provider
-                DELETE http://localhost:8080/api/jobprovider/deletingjob/{Job Id}/
+          > DELETE http://localhost:8080/api/jobprovider/deletingjob/{Job Id}/
 
        * Uploading Profile Picture
-                PATCH http://localhost:8080/api/jobprovider/uploadprofilepicture
+          > PATCH http://localhost:8080/api/jobprovider/uploadprofilepicture
 
        * udpating profile
-                PATCH http://localhost:8080/api/jobprovider/editprofile
+          > PATCH http://localhost:8080/api/jobprovider/editprofile
 
 
        * updating editing  password 
-                PATCH http://localhost:8080/api/jobprovider/editpassword
+          > PATCH http://localhost:8080/api/jobprovider/editpassword
 
        * Logging out from Provider Account
-                DELETE http://localhost:8080/api/jobprovider/logout/
+          > DELETE http://localhost:8080/api/jobprovider/logout/
 
 
        * forgot passsword sending system generated password
-                POST http://localhost:8080/api/user/forgotpassword
+          >  POST http://localhost:8080/api/user/forgotpassword
 
 
  2. SEEKER's ROUTES  
 
        * Register Seeker Account
-                POST http://localhost:8080/api/user/register
+          > POST http://localhost:8080/api/user/register
 
        * Account Activation
-                GET http://localhost:8080/api/accountactivation/{Activation Token}?user=
+          > GET http://localhost:8080/api/accountactivation/{Activation Token}?user=
                 {Role}
 
 
        * Login into Seeker Account
-                POST http://localhost:8080/api/user/login
+          > POST http://localhost:8080/api/user/login
 
        * showing all jobs which are available
-                GET http://localhost:8080/api/jobseeker/searchjobs/allavailablejobs/{Page Number}/
+          > GET http://localhost:8080/api/jobseeker/searchjobs/allavailablejobs/{Page Number}/
 
 
        * filtering jobs by category of hourly, daily, weekly, monthly
-                GET http://localhost:8080/api/jobseeker/searchjobs/filter/{Page Number}?category={Hourly/Daily/Weekly/Monthly}
-
+          > GET http://localhost:8080/api/jobseeker/searchjobs/filter/{Page Number}?category={Hourly/Daily/Weekly/Monthly}
 
        * showing single job by jobId
-                GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/{Job Id}/
-
+          > GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/{Job Id}/
 
        * Job Accepting by Seeker
-            PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/{Job Id}/isaccepted
+            > PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/{Job Id}/isaccepted
 
        * showing jobs accepted by seeker till date
-            GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/{Page Number}
+            > GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/{Page Number}
 
        *  Uploading Profile Picture
-            PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
+            > PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
 
        * udpating profile
-            PATCH http://localhost:8080/api/jobseeker/editprofile
+            > PATCH http://localhost:8080/api/jobseeker/editprofile
 
        * Edit password
-            PATCH http://localhost:8080/api/jobseeker/editpassword
+            > PATCH http://localhost:8080/api/jobseeker/editpassword
 
 
        * Logging out from Seeker Account
-            DELETE http://localhost:8080/api/jobseeker/logout
+           > DELETE http://localhost:8080/api/jobseeker/logout
 
        * forgot passsword sending system generated password
-            POST http://localhost:8080/api/user/forgotpassword
+            > POST http://localhost:8080/api/user/forgotpassword
 
 3.  Admin Routes 
 
        * Logging In from App Administrator Account
-            POST http://localhost:8080/api/user/login
+           > POST http://localhost:8080/api/user/login
 
        * view all available(including blocked) jobs
-            GET http://localhost:8080/api/admin/allavailablejobs/{Page Number}
+            > GET http://localhost:8080/api/admin/allavailablejobs/{Page Number}
 
        * view all accepted jobs
-            GET http://localhost:8080/api/admin/allacceptedjobs/{Page Number}
+            > GET http://localhost:8080/api/admin/allacceptedjobs/{Page Number}
 
        * view all Providers
-            GET http://localhost:8080/api/admin/allproviders/{Page Number}
+            > GET http://localhost:8080/api/admin/allproviders/{Page Number}
 
        * view all seekers
-            GET http://localhost:8080/api/admin/allseekers/1
+            > GET http://localhost:8080/api/admin/allseekers/1
 
        * Blocking Unwanted App User(s) or Unwanted Job(s)
-            PATCH http://localhost:8080/api/admin/{User/Job Id}/isblocked/?model={Role}
+           > PATCH http://localhost:8080/api/admin/{User/Job Id}/isblocked/?model={Role}
 
        * logout from Administrator Account
-           DELETE http://localhost:8080/api/admin/logout/           
+           >DELETE http://localhost:8080/api/admin/logout/           
 
 # Future Goals :
       1. Denial of job after acceptance from Provider side and also from Seeker side.
@@ -138,11 +136,6 @@ Project done by Siddhida and Harish Ponna
       8. Background Verification
 
 
+
 ## Context Diagram (MVP)
 ![Context Diagram](https://res.cloudinary.com/da8rrc2mj/image/upload/v1585817326/IMG-20200402-WA0001_es56y5.png)
-     
-
-
-
-
-   
