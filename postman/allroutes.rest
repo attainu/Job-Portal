@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
   	"name": "Harish Ponna",
-   "email": "harishponna55@gmail.com",
+   "email": "harishponna551112113@gmail.com",
    "password": "123456",
-   "aadhaarNumber":123456789123,
+   "aadhaarNumber":333313333133,
    "gender":"male",
    "contactNumber":1234567890,
    "address":"chikkadpally hyderabad telangana",

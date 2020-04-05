@@ -12,7 +12,7 @@ module.exports = {
                 .skip(((req.params.pagenumber) - 1) * 5)
                 .limit(5)
                 .sort({ createdAt: -1 });
-                 const count = await JobDetails.find({isAccepted: false})
+                 const count = await JobDetails.find({isAccepted: false,isBlocked:false })
                 .countDocuments({});
                 console.log("jobs=", jobs)
                 console.log("count=", count)
