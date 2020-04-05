@@ -1,4 +1,3 @@
-
 const JobDetails = require("../models/Job");
 const JobProviderDetails = require("../models/JobProvider");
 const JobSeekerDetails = require("../models/JobSeeker");

@@ -24,7 +24,7 @@ Content-Type: application/json
 
  {  
    "email": "harishponna55@gmail.com",
-   "password": "123456",   
+   "password": "64970183",   
    "role" : "Job-Provider" 
   }
 
@@ -125,7 +125,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBk
 ###  Logging out from Provider Account
 DELETE http://localhost:8080/api/jobprovider/logout/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODYwODc5MzgsImV4cCI6MTY0NjA4NzkzOH0.9-CI9amt46gntaBLQu-H1ppQUlj1L-WYKh1UJwjHylo
 
 
 ### forgot passsword sending system generated password
