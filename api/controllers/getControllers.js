@@ -95,7 +95,7 @@ module.exports = {
             }           
         } catch (error) {
             console.log(error)
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // --------------------Viewing Accepted Jobs by Seeker-----------------
@@ -112,7 +112,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error.message)
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // --------------------Viewing Accepted Jobs by Provider-----------------
@@ -127,7 +127,7 @@ module.exports = {
             return res.status(200).send({ allJobsPostedTillDateByAParticularProvider: jobs, count: count })       
         } catch (error) {
             console.log(error.message)
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
         // ---------------------Account Activation (Job-Provider & Job-Seeker)-----------------------
@@ -144,13 +144,13 @@ module.exports = {
             if (payload) {
                 const updated = await schema.findOneAndUpdate( {activationToken: req.params.activationtoken},{ isVerified: true, activationToken: null })               
                 if (updated) return res.status(202).send("Account activated Successfully. Please visit SeasonalEmployment.com and Login");
-                return res.send("Account already activated")
+                return res.send({message:"Account already activated"})
             }
-            return res.send("Invalid Token")
+            return res.send({error:"Invalid Token"})
         }
-        catch (err) {
-            console.log(err)
-            res.status(500).send(err)
+        catch (error) {
+            console.log(error)
+            res.status(500).send({error:error.message})
         }
     } ,
     // --------------------------Admin Routes------------------------------------------------------------------------
@@ -169,7 +169,7 @@ module.exports = {
                 return res.status(200).json({ count,jobs })
         }
         catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // ------------------- All Accepted Jobs----------------------
@@ -184,7 +184,7 @@ module.exports = {
                 .countDocuments({});
                 return res.status(200).json({ count,jobs })
         } catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // --------------All Providers List------------------------------------------------
@@ -199,7 +199,7 @@ module.exports = {
                 .countDocuments({});
                 return res.status(200).json({ count,jobProviders })
         } catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // --------------All Seekers List------------------------------------------------
@@ -214,7 +214,7 @@ module.exports = {
                 .countDocuments({});
                 return res.status(200).json({ count,jobSeekers })
         } catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     }
     

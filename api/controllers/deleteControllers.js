@@ -12,14 +12,14 @@ module.exports = {
     async deletingJob(req, res) {
         try {
             const destroyed = await JobDetails.findOneAndDelete({ _id: req.params.jobid,isBlocked: false });
-            if (!destroyed) throw new Error('Job do not exist(or)deleted already')
+            if (!destroyed) return res.send({message:'Job do not exist(or)deleted already'})
             const jobProviderDetails = await JobProviderDetails.findOne({ _id: req.jobProvider._id })
             const totalPosted = jobProviderJobsDecrement(jobProviderDetails.totalPosted)
             jobProviderDetails.totalPosted = totalPosted;
             jobProviderDetails.save()
-            return res.status(202).send("One job deleted Successfully")
+            return res.status(202).send({message:"One job deleted Successfully"})
         } catch (error) {
-            return res.status(404).send(error.message)
+            return res.status(404).send({error:error.message})
         }
     },
 
@@ -30,9 +30,9 @@ module.exports = {
             if (req.jobSeeker) { var schema = JobSeekerDetails; var user = req.jobSeeker }
             if (req.admin) { var schema = AdminDetails; var user = req.admin }
             await schema.findOneAndUpdate({ _id: user._id }, { jwt: null })
-            return res.status(202).send("You are successfully logged out");
+            return res.status(202).send({message:"You are successfully logged out"});
         } catch (error) {
-            res.status(404).send(error.message)
+            res.status(404).send({error:error.message})
         }
     }
 }

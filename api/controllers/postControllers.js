@@ -72,7 +72,7 @@ module.exports = {
     }
     catch (err) {
       if (err.name === "SequelizeValidationError")
-        return res.status(400).send(`Validation Error: ${err.message}`);
+        return res.status(400).send(`error: ${err.message}`);
     }
   },
 
@@ -82,7 +82,7 @@ module.exports = {
       var email = req.body.email;
       var password = req.body.password;
       if (!email || !password)
-        return res.status(400).send("Incorrect credentials");
+        return res.status(400).send({error:"Incorrect credentials"});
 
       if (req.body.role == "Job-Provider") var schema = JobProviderDetails;
       if (req.body.role == "Job-Seeker") var schema = JobSeekerDetails;
@@ -99,10 +99,10 @@ module.exports = {
       const token = await jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 1000 * 600 * 100 })
       user.jwt = token;
       user.save()
-      return res.status(202).send({ token ,user})
+      return res.status(202).send({ jwt:token ,user})
     }
     catch (error) {
-      return res.status(500).send(error.message)
+      return res.status(500).send({error:error.message})
     }
   },
 
@@ -120,14 +120,11 @@ module.exports = {
       const hashedPassword = await hash(rawPassword, 10)
       user.password = hashedPassword;
       user.save();
-      console.log("rawpass=",rawPassword)
-      console.log("hashedPassword=",hashedPassword)
-      console.log("user=",user)
 
       forgotPasswordMailing(req.body.email, rawPassword)
       return res.status(202).send({message:"A system generated password has been sent to your email successfully. Login with that password and edit your password in profile section"})
     } catch (err) {
-      return res.status(500).send(err.message)
+      return res.status(500).send({error:err.message})
     }
   }
 }
