@@ -30,7 +30,7 @@ router.get(`/api/admin/allseekers/:pagenumber`, authenticateAdminsToken, allSeek
  // -------------------Job Seekers Routes--------------------------------
  router.get(`/api/jobseeker/searchjobs/allavailablejobs/:pagenumber/`, allAvailableJobs)
  router.get(`/api/jobseeker/searchjobs/filter/:pagenumber`, filterJobs)  // ?query=(search by category, city, pinCode, keyword, preference)
- router.get(`/api/jobseeker/searchjobs/byjobId/:jobid/`, authenticateSeekersToken, searchJobById)
+ router.get(`/api/jobseeker/searchjobs/byjobid/:jobid/`, authenticateSeekersToken, searchJobById)
  router.get(`/api/jobseeker/jobsacceptedtilldate/:pagenumber/`, authenticateSeekersToken, allJobsAcceptedTillDateByAParticularSeeker)
 
 

@@ -19,18 +19,18 @@ module.exports = {
                 return res.status(200).json({ count,jobs })
         }
         catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // -----------------Searching Job by Job id--------------------
 
     async searchJobById (req, res) { 
         try {
-            const job = await JobDetails.findOne({ isAccepted: false, id: req.params.jobid ,isBlocked:false})
+            const job = await JobDetails.findOne({ isAccepted: false, _id: req.params.jobid ,isBlocked:false})
             console.log(job)
-            return res.status(200).json(job)  
+            return res.status(200).json({job})  
         } catch (error) {
-            return res.status(500).send(error.message)
+            return res.status(500).send({error:error.message})
         }
     },
     // -----------------Filtering Available Jobs--------------------

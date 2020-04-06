@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
   	"name": "Harish Ponna",
-   "email": "harishponna551112113@gmail.com",
+   "email": "harishponna99@gmail.com",
    "password": "123456",
-   "aadhaarNumber":333313333133,
+   "aadhaarNumber":888899990000,
    "gender":"male",
    "contactNumber":1234567890,
    "address":"chikkadpally hyderabad telangana",
@@ -24,7 +24,7 @@ Content-Type: application/json
 
  {  
    "email": "harishponna55@gmail.com",
-   "password": "64970183",   
+   "password": "68451919",   
    "role" : "Job-Provider" 
   }
 
@@ -147,10 +147,10 @@ POST http://localhost:8080/api/user/register
 content-type: application/json
 
 {
-  	"name": "Siddhida",
-    "email":"jhasiddhida@gmail.com",
+  	"name": "harish",
+    "email":"harishponna55@gmail.com",
     "password":"123456",
-   "aadhaarNumber" :123456789789,
+   "aadhaarNumber" :121456789789,
   "gender":"female",
    "contactNumber" : 1234567890,
    "address" : "Ranchi abcdefghtikjjh",
@@ -158,7 +158,7 @@ content-type: application/json
 }
 
 ###  Account Activation
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC45MjQ5NzExNjY1MjY2Njc4LCJpYXQiOjE1ODU3MzUwMjUsImV4cCI6MTY0NTczNTAyNX0.15SCcIFKUIZIcgJ64-r4YwzgVT8FmFnok5dznzCyFN8?user=Job-Seeker
+GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC40NzIzODE2MDgzNjM3OTU3LCJpYXQiOjE1ODYxMTkyMDYsImV4cCI6MTY0NjExOTIwNn0.fIE47Q17OaEYhccoAflenOn0VseVoScBuRpJxbgU-Bk?user=Job-Seeker
 
 
 ###   Login into Seeker Account
@@ -166,7 +166,7 @@ POST http://localhost:8080/api/user/login
 content-type: application/json
 
 {
-    "email":"jhasiddhida@gmail.com",
+    "email":"harishponna55@gmail.com",
     "password":"123456",
     "role":"Job-Seeker"
 }
@@ -181,15 +181,15 @@ GET http://localhost:8080/api/jobseeker/searchjobs/filter/1?category=hourly
 
 
 ### showing single job by jobId
-GET http://localhost:8080/api/jobseeker/searchjobs/byjobId/1/
+GET http://localhost:8080/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYxMjEyOTgsImV4cCI6MTY0NjEyMTI5OH0.juGfGJakvMekfl7yO5-p3ufA2l1Kop8Az_TZXLWJ7NU
 
 
 ###   Job Accepting by Seeker
 PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3/isaccepted
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYxMjEyOTgsImV4cCI6MTY0NjEyMTI5OH0.juGfGJakvMekfl7yO5-p3ufA2l1Kop8Az_TZXLWJ7NU
 
 
 ###  showing jobs accepted by seeker till date

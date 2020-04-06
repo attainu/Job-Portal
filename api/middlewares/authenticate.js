@@ -34,8 +34,9 @@ async  authenticateSeekersToken(req, res, next) {
             return res.sendStatus(403)
         }
         const jobSeeker = await JobSeekerDetails.findOne({_id: payload._id, jwt: token})
-        if (jobSeeker.isBlocked) return res.status(401).send(`${jobSeeker.name}, you are blocked for the misuse of SeasonalEmployment.com.....`);
+        console.log(jobSeeker)
         if(!jobSeeker) return res.sendStatus(401)
+        if (jobSeeker.isBlocked) return res.status(401).send(`${jobSeeker.name}, you are blocked for the misuse of SeasonalEmployment.com.....`);
         req.jobSeeker = jobSeeker
         next()
     } catch (err) {
