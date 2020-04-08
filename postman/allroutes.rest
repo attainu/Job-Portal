@@ -31,19 +31,18 @@ Content-Type: application/json
 ### Posting a job by provider
 POST https://seasonal-jobs.herokuapp.com/api/jobprovider/postingjob
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYTQyMTljOTM1NjAwMTc1MzhhMzIiLCJpYXQiOjE1ODYzNDEwODEsImV4cCI6MTY0NjM0MTA4MX0.BWusDGTlDsCByZ6ScCrYXGQg4ejrJg8Ksk_JHFf2SV8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYTQyMTljOTM1NjAwMTc1MzhhMzIiLCJpYXQiOjE1ODYzNDI0OTAsImV4cCI6MTY0NjM0MjQ5MH0.7oMq4hyjfx9OCfPaL5nsxv6gkgE1yebjSOB_VgQTeX8
 
 {
-            "category":"Hourly",
-            "duration": 5,
-            "title":"Piano Tutor",
-            "description":"Piano teaching for my kid,who is 10 years old.",
-            "preferedSkills":"Pianist",
-            "rateOfPayment":200,
+            "category":"Weekely",
+            "duration": 4,
+            "title":"Shop Assistant",
+            "description":"I need an assistant to assist me in my shop for card making.",
+            "preferedSkills":"Active, Honest, Educated upto HSC qualified, Literate, hard worker",
+            "rateOfPayment":5000,
             "preference":"Any",
-			       "timeSlot":"1pm-6pm",
-            "keyword":"Pianist",
-            "jobProviderName":"Siddhida",
+			       "timeSlot":"8AM-7PM",
+            "keyword":"Active, Honest, Educated upto HSC qualified, Literate, English",
             "contactNumber": 6512244936,
             "city": "Noida",
             "pincode": 201301,
