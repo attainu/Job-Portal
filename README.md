@@ -1,6 +1,8 @@
 # Job-Portal
 Project done by Siddhida and Harish Ponna
 
+# URL = https://seasonal-jobs.herokuapp.com
+
 # Contributors
 * Harish Ponna
 * Siddhida
