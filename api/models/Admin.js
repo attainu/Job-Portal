@@ -18,6 +18,11 @@ const AdminSchema = new Schema({
     type: String,
     required: false
   },
+  profilePicture:{
+    type:String,
+    required:false,
+    default:null
+  },
   isVerified:{
     type:Boolean,
     default:false

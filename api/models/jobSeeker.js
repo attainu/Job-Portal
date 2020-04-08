@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
-const bcrypt = require("bcryptjs")
 
 const jobSeekerSchema = new Schema({
     name: {
@@ -35,7 +34,8 @@ const jobSeekerSchema = new Schema({
     },
     profilePicture: {
         type: String,
-        required:false
+        required:false,
+        default:null
     },
     role: {
         type: String,

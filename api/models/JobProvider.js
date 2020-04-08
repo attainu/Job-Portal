@@ -36,7 +36,8 @@ const jobProviderSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    required:false
+    required:false,
+    default:null
   },
   role: {
     type: String,

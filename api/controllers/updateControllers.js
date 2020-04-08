@@ -67,7 +67,8 @@ module.exports = {
             if (req.jobProvider) { var schema = JobProviderDetails; user = req.jobProvider }
             if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
             await schema.findOneAndUpdate({_id: user._id }, { contactNumber: req.body.contactNumber, address: req.body.address })
-            return res.status(202).send({message:"Profile Updated successfully"})
+            const User = await schema.findOne({_id:user._id})
+            return res.status(202).send({message:"Profile Updated successfully",user:User})
         } catch (error) {
             return res.status(500).send({error:error.message})
         }

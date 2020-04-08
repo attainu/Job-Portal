@@ -2,62 +2,62 @@
 
 
 ### Registering Provider Account
-POST http://localhost:8080/api/user/register
+POST https://seasonal-jobs.herokuapp.com/api/user/register
 Content-Type: application/json
 
 {
-  	"name": "Harish Ponna",
-   "email": "harishponna99@gmail.com",
+  	"name": "Jha Siddhida",
+   "email": "jhasiddhida@gmail.com",
    "password": "123456",
-   "aadhaarNumber":888899990000,
-   "gender":"male",
-   "contactNumber":1234567890,
-   "address":"chikkadpally hyderabad telangana",
+   "aadhaarNumber":663598188247,
+   "gender":"Female",
+   "contactNumber": 6512244936,
+   "address":"sector 22, Choura rasta, Noida, G.B Nagar, UP, PIN.201301",
    "role" : "Job-Provider" 
   }
 ###  Provider Account Activation
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xOTc1ODQ4MjkwOTUxNTY3MywiaWF0IjoxNTg1NzM0MzU3LCJleHAiOjE2NDU3MzQzNTd9.wAXI7841bEkCF35NMC5GBa-2IptBymbs0sbqllSYi00?user=Job-Provider
+GET https://seasonal-jobs.herokuapp.com/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC4xOTc1ODQ4MjkwOTUxNTY3MywiaWF0IjoxNTg1NzM0MzU3LCJleHAiOjE2NDU3MzQzNTd9.wAXI7841bEkCF35NMC5GBa-2IptBymbs0sbqllSYi00?user=Job-Provider
 
 ### Logging into Provider Account
-POST http://localhost:8080/api/user/login
+POST https://seasonal-jobs.herokuapp.com/api/user/login
 Content-Type: application/json
 
  {  
-   "email": "harishponna55@gmail.com",
-   "password": "68451919",   
+   "email": "jhasiddhida@gmail.com",
+   "password": "123456",   
    "role" : "Job-Provider" 
   }
 
 ### Posting a job by provider
-POST http://localhost:8080/api/jobprovider/postingjob
+POST https://seasonal-jobs.herokuapp.com/api/jobprovider/postingjob
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYTQyMTljOTM1NjAwMTc1MzhhMzIiLCJpYXQiOjE1ODYzNDEwODEsImV4cCI6MTY0NjM0MTA4MX0.BWusDGTlDsCByZ6ScCrYXGQg4ejrJg8Ksk_JHFf2SV8
 
 {
-            "category":"yearly",
+            "category":"Hourly",
             "duration": 5,
-            "title":"piano tutor",
-            "description":"piano teaching for my kid",
-            "preferedSkills":"pianist",
-            "rateOfPayment":500,
-            "preference":"any",
+            "title":"Piano Tutor",
+            "description":"Piano teaching for my kid,who is 10 years old.",
+            "preferedSkills":"Pianist",
+            "rateOfPayment":200,
+            "preference":"Any",
 			       "timeSlot":"1pm-6pm",
-            "keyword":"pianist",
-            "jobProviderName":"Harish",
-            "contactNumber": 8977700000,
-            "city": "Hyderabad",
-            "pincode": 500060,
-            "address": "hyderabad chikkadpally"
+            "keyword":"Pianist",
+            "jobProviderName":"Siddhida",
+            "contactNumber": 6512244936,
+            "city": "Noida",
+            "pincode": 201301,
+            "address": "sector 22, Choura rasta, Noida, G.B Nagar, UP, PIN.201301"
         }
 
 ###  Showing provider his own posted jobs
-GET http://localhost:8080/api/jobprovider/jobspostedtilldate/1/
+GET https://seasonal-jobs.herokuapp.com/api/jobprovider/jobspostedtilldate/1/
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 
 ###  Job updation by Provider Account
-PATCH http://localhost:8080/api/jobprovider/udpatingjob/5e8463cb5c40d0372ccbe1f4/
+PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/udpatingjob/5e8463cb5c40d0372ccbe1f4/
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
@@ -80,13 +80,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBk
 
 
 ###  Job Deletion by Provider
-DELETE http://localhost:8080/api/jobprovider/deletingjob/5e8463cb5c40d0372ccbe1f4/
+DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/deletingjob/5e8463cb5c40d0372ccbe1f4/
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 
 ###   Uploading Profile Picture
-PATCH http://localhost:8080/api/jobprovider/uploadprofilepicture
+PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/uploadprofilepicture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -102,7 +102,7 @@ Content-Type: image/jpeg
 
 
 ### udpating profile
-PATCH http://localhost:8080/api/jobprovider/editprofile
+PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editprofile
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
@@ -112,7 +112,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBk
 }
 
 ### updating editing  password 
-PATCH http://localhost:8080/api/jobprovider/editpassword
+PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editpassword
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
@@ -123,13 +123,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBk
 
 
 ###  Logging out from Provider Account
-DELETE http://localhost:8080/api/jobprovider/logout/
+DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/logout/
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODYwODc5MzgsImV4cCI6MTY0NjA4NzkzOH0.9-CI9amt46gntaBLQu-H1ppQUlj1L-WYKh1UJwjHylo
 
 
 ### forgot passsword sending system generated password
-POST http://localhost:8080/api/user/forgotpassword
+POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
 Content-Type: application/json
 
 {
@@ -143,7 +143,7 @@ Content-Type: application/json
 
 
 ###   Register Seeker Account
-POST http://localhost:8080/api/user/register
+POST https://seasonal-jobs.herokuapp.com/api/user/register
 content-type: application/json
 
 {
@@ -158,48 +158,48 @@ content-type: application/json
 }
 
 ###  Account Activation
-GET http://localhost:8080/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC40NzIzODE2MDgzNjM3OTU3LCJpYXQiOjE1ODYxMTkyMDYsImV4cCI6MTY0NjExOTIwNn0.fIE47Q17OaEYhccoAflenOn0VseVoScBuRpJxbgU-Bk?user=Job-Seeker
+GET https://seasonal-jobs.herokuapp.com/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC40NzIzODE2MDgzNjM3OTU3LCJpYXQiOjE1ODYxMTkyMDYsImV4cCI6MTY0NjExOTIwNn0.fIE47Q17OaEYhccoAflenOn0VseVoScBuRpJxbgU-Bk?user=Job-Seeker
 
 
 ###   Login into Seeker Account
-POST http://localhost:8080/api/user/login
+POST https://seasonal-jobs.herokuapp.com/api/user/login
 content-type: application/json
 
 {
     "email":"harishponna55@gmail.com",
-    "password":"123456",
+    "password":"64159778",
     "role":"Job-Seeker"
 }
 
 ### showing all jobs which are available
-GET http://localhost:8080/api/jobseeker/searchjobs/allavailablejobs/1/
+GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/1/
 
 
 ### filtering jobs by category of hourly, daily, weekly, monthly
 
-GET http://localhost:8080/api/jobseeker/searchjobs/filter/1?category=hourly
+GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/filter/1?category=hourly
 
 
 ### showing single job by jobId
-GET http://localhost:8080/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3
+GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYxMjEyOTgsImV4cCI6MTY0NjEyMTI5OH0.juGfGJakvMekfl7yO5-p3ufA2l1Kop8Az_TZXLWJ7NU
 
 
 ###   Job Accepting by Seeker
-PATCH http://localhost:8080/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3/isaccepted
+PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobid/5e8463a55c40d0372ccbe1f3/isaccepted
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYxMjEyOTgsImV4cCI6MTY0NjEyMTI5OH0.juGfGJakvMekfl7yO5-p3ufA2l1Kop8Az_TZXLWJ7NU
 
 
 ###  showing jobs accepted by seeker till date
-GET http://localhost:8080/api/jobseeker/jobsacceptedtilldate/1
+GET https://seasonal-jobs.herokuapp.com/api/jobseeker/jobsacceptedtilldate/1
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
 
 
 ###   Uploading Profile Picture
-PATCH http://localhost:8080/api/jobseeker/uploadprofilepicture
+PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/uploadprofilepicture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
 
@@ -216,31 +216,31 @@ Content-Type: image/jpeg
 
 
 ### udpating profile
-PATCH http://localhost:8080/api/jobseeker/editprofile
+PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editprofile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYzMzY4NjcsImV4cCI6MTY0NjMzNjg2N30.F4etosdKxlfcye4LOUK7VI9mVJTGBAbNgsyArRYt2-U
 
 {
-  "contactNumber" : 8977777077,
-   "address" : "Ranchi abcdefghtikjjh"
+  "contactNumber" : 1111112123,
+   "address" : "goa abcdefghtisfsfkjjh"
 }
 
 
 ##### Edit password
-PATCH http://localhost:8080/api/jobseeker/editpassword
+PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editpassword
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThhNDIyNjc2NGZhMDI5NTQ4ZGI5ODkiLCJpYXQiOjE1ODYzMzY4NjcsImV4cCI6MTY0NjMzNjg2N30.F4etosdKxlfcye4LOUK7VI9mVJTGBAbNgsyArRYt2-U
 
 {
-  "password":"123456"
+  "password":"123"
 }
 
 ###  Logging out from Seeker Account
-DELETE http://localhost:8080/api/jobseeker/logout
+DELETE https://seasonal-jobs.herokuapp.com/api/jobseeker/logout
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
 
 ### forgot passsword sending system generated password
-POST http://localhost:8080/api/user/forgotpassword
+POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
 Content-Type: application/json
 
 {
@@ -257,7 +257,7 @@ Content-Type: application/json
 
 ### Loggin In
 
-POST http://localhost:8080/api/user/login
+POST https://seasonal-jobs.herokuapp.com/api/user/login
 Content-Type: application/json
 
 {
@@ -268,25 +268,25 @@ Content-Type: application/json
 }
 
 ### view all available(including blocked) jobs
-GET http://localhost:8080/api/admin/allavailablejobs/1
+GET https://seasonal-jobs.herokuapp.com/api/admin/allavailablejobs/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### view all accepted jobs
-GET http://localhost:8080/api/admin/allacceptedjobs/1
+GET https://seasonal-jobs.herokuapp.com/api/admin/allacceptedjobs/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### view all Providers
-GET http://localhost:8080/api/admin/allproviders/1
+GET https://seasonal-jobs.herokuapp.com/api/admin/allproviders/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### view all seekers
-GET http://localhost:8080/api/admin/allseekers/1
+GET https://seasonal-jobs.herokuapp.com/api/admin/allseekers/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### Blocking
-PATCH http://localhost:8080/api/admin/5e8465711034132abc7191a5/isblocked/?model=Job-Seeker 
+PATCH https://seasonal-jobs.herokuapp.com/api/admin/5e8465711034132abc7191a5/isblocked/?model=Job-Seeker 
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### logout
-DELETE http://localhost:8080/api/admin/logout/
+DELETE https://seasonal-jobs.herokuapp.com/api/admin/logout/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
