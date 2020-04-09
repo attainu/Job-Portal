@@ -6,13 +6,13 @@ POST https://seasonal-jobs.herokuapp.com/api/user/register
 Content-Type: application/json
 
 {
-  	"name": "Siddhida",
-   "email": "siddhidajha@gmail.com",
+  	"name": "Harish Ponna",
+   "email": "harishponna55@gmail.com",
    "password": "123456",
-   "aadhaarNumber":663598188249,
-   "gender":"Female",
-   "contactNumber": 6512244937,
-   "address":"sector 22, Choura rasta, Noida, G.B Nagar, UP, PIN.201301",
+   "aadhaarNumber":123412341234,
+   "gender":"Male",
+   "contactNumber": 9876543211,
+   "address":"road.no 9, Dilsukhnagar, Hyderabad, Telangana, PIN.500060",
    "role" : "Job-Provider" 
   }
 ###  Provider Account Activation
@@ -23,7 +23,7 @@ POST https://seasonal-jobs.herokuapp.com/api/user/login
 Content-Type: application/json
 
  {  
-   "email": "siddhidajha@gmail.com",
+   "email": "harishponna55@gmail.com",
    "password": "123456",   
    "role" : "Job-Provider" 
   }
@@ -31,89 +31,89 @@ Content-Type: application/json
 ### Posting a job by provider
 POST https://seasonal-jobs.herokuapp.com/api/jobprovider/postingjob
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDIxMDUsImV4cCI6MTY0NjQwMjEwNX0.4KiCLi4DFSpNjpJd22-8RuKu0pVngeJeJ9xDdx0hx6E
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYWEwMzljOTM1NjAwMTc1MzhhMzQiLCJpYXQiOjE1ODYzNDI1MDEsImV4cCI6MTY0NjM0MjUwMX0.mB3uDYoeMP7za2E6i68_JkTIJN1V7XV6utAxzG4JL4M
 
 {
             "category":"Daily",
-            "duration": 1,
-            "title":"Helper",
-            "description":"I need a helper to accompany me in road trip to Rameshwaram.",
-            "preferedSkills":"Active, Honest, Educated upto HSC qualified, Literate, hard worker",
+            "duration":30,
+            "title":"MERN Stack Tutor",
+            "description":"To teach lessons of MERN Stack basics",
+            "preferedSkills":"Developer",
             "rateOfPayment":500,
-            "preference":"Female",
-			       "timeSlot":"8AM-7PM",
-            "keyword":"Helper",
-            "contactNumber": 6512244937,
-            "city": "Noida",
-            "pincode": 201301,
-            "address": "sector 22, Choura rasta, Noida, G.B Nagar, UP, PIN.201301"
+            "preference":"Any",
+			       "timeSlot":"5PM-7PM",
+            "keyword":"Developer, Tutor",
+            "jobProviderName":"Harish",
+            "contactNumber": 9876543211,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "road.no 9, Dilsukhnagar, Hyderabad, Telangana, PIN.500060"
         }
 
 ###  Showing provider his own posted jobs
 GET https://seasonal-jobs.herokuapp.com/api/jobprovider/jobspostedtilldate/1/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYWEwMzljOTM1NjAwMTc1MzhhMzQiLCJpYXQiOjE1ODYzNjQxMzQsImV4cCI6MTY0NjM2NDEzNH0.Fant4QmV3uqDE_-Iy_IyeXpfRtJSMtSw3d72k9cULnY
 
 ###  Job updation by Provider Account
-PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/udpatingjob/5e8e9083999cbf0017a5d6ca/
+PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/udpatingjob/5e8463cb5c40d0372ccbe1f4/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 {
             "category":"monthly",
             "duration": 2,
-            "title":"Paino tutor",
-            "description":"paino teacher for me.",
-            "preferedSkills":"Piano Player",
+            "title":"paino tutor",
+            "description":"paino teaching for my kid",
+            "preferedSkills":"pianist",
             "rateOfPayment":500,
             "preference":"any",
-			       "timeSlot":"4PM-6PM",
-            "keyword":"Musician",
-            "jobProviderName":"Siddhida",
-            "contactNumber": 6512244937,
-            "city": "Ranchi",
-            "pincode": 834004,
-            "address": "Ranchi, Jharkhand."
+			       "timeSlot":"1pm-6pm",
+            "keyword":"pianist",
+            "jobProviderName":"Harish",
+            "contactNumber": 8977700000,
+            "city": "Hyderabad",
+            "pincode": 500060,
+            "address": "hyderabad chikkadpally"
 }
 
 
 ###  Job Deletion by Provider
-DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/deletingjob/5e8e8fd2999cbf0017a5d6c9/
+DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/deletingjob/5e8463cb5c40d0372ccbe1f4/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 
 ###   Uploading Profile Picture
 PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/uploadprofilepicture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThkYWEwMzljOTM1NjAwMTc1MzhhMzQiLCJpYXQiOjE1ODYzNTMzNTAsImV4cCI6MTY0NjM1MzM1MH0.02sW5nJUruR-RC70iTzY_WHwvbSlkiZ2lAtJyFPtFVE
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="text"
 
 title
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="Image2.jpeg"
+Content-Disposition: form-data; name="image"; filename="hari.jpeg"
 Content-Type: image/jpeg
 
-< C:\Users\AGB\Desktop\Project\Images\Image2.jpg
+< C:\Users\Harish\Desktop\hari.jpeg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
 ### udpating profile
 PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editprofile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 {
   "contactNumber" : 123456788,
-   "address" : "Dhoni's Town, Once Hill Station, Now Capital of Jharkhand Ranchi."
+   "address" : "Bhupalpally abcdefghtikjjh"
 }
 
 ### updating editing  password 
 PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editpassword
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDIxMDUsImV4cCI6MTY0NjQwMjEwNX0.4KiCLi4DFSpNjpJd22-8RuKu0pVngeJeJ9xDdx0hx6E
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODU3MzQ1MzQsImV4cCI6MTY0NTczNDUzNH0.34-59--3LTpIA1jUOsvoV7c_51KsOj4lurjGqH_7uXo
 
 {
   "password":"123456"
@@ -124,7 +124,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNi
 ###  Logging out from Provider Account
 DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/logout/
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlOGVjMDk5OWNiZjAwMTdhNWQ2YzciLCJpYXQiOjE1ODY0MDExMDMsImV4cCI6MTY0NjQwMTEwM30.a_S-C4aVqtVg_WQP44LAJn_z1h1AprvuOdlAls87Hko
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjJkNTVjNDBkMDM3MmNjYmUxZjAiLCJpYXQiOjE1ODYwODc5MzgsImV4cCI6MTY0NjA4NzkzOH0.9-CI9amt46gntaBLQu-H1ppQUlj1L-WYKh1UJwjHylo
 
 
 ### forgot passsword sending system generated password
@@ -146,18 +146,18 @@ POST https://seasonal-jobs.herokuapp.com/api/user/register
 content-type: application/json
 
 {
-  	"name": "harish",
-    "email":"harishponna55@gmail.com",
+  	"name": "Keerthi",
+    "email":"Keerthi@gmail.com",
     "password":"123456",
-   "aadhaarNumber" :121456789789,
-  "gender":"female",
-   "contactNumber" : 1234567890,
-   "address" : "Ranchi abcdefghtikjjh",
+   "aadhaarNumber" :123412341235,
+  "gender":"Female",
+   "contactNumber" : 9876543212,
+  "address":"road.no10, Kothapet, Hyderabad, Telangana, PIN.500060",
    "role" : "Job-Seeker"
 }
 
 ###  Account Activation
-GET https://seasonal-jobs.herokuapp.com/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC40NzIzODE2MDgzNjM3OTU3LCJpYXQiOjE1ODYxMTkyMDYsImV4cCI6MTY0NjExOTIwNn0.fIE47Q17OaEYhccoAflenOn0VseVoScBuRpJxbgU-Bk?user=Job-Seeker
+GET https://seasonal-jobs.herokuapp.com/api/accountactivation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MC41MDI1MzA4NzUxMDk2OTg0LCJpYXQiOjE1ODYzNDYzODEsImV4cCI6MTY0NjM0NjM4MX0.vFq4PRCqFvyqzpBGSWTetuptB3oZzvqxutliewAuxO0?user=Job-Seeker
 
 
 ###   Login into Seeker Account
@@ -165,13 +165,13 @@ POST https://seasonal-jobs.herokuapp.com/api/user/login
 content-type: application/json
 
 {
-    "email":"harishponna55@gmail.com",
-    "password":"64159778",
+    "email":"keerthi42605@gmail.com",
+    "password":"123456",
     "role":"Job-Seeker"
 }
 
 ### showing all jobs which are available
-GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/1/
+GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/6/
 
 
 ### filtering jobs by category of hourly, daily, weekly, monthly
@@ -200,7 +200,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQx
 ###   Uploading Profile Picture
 PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/uploadprofilepicture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTg0NjU3MTEwMzQxMzJhYmM3MTkxYTUiLCJpYXQiOjE1ODU3MzUxMDAsImV4cCI6MTY0NTczNTEwMH0.YnZdcV4CmsoiEF-xpqIBf9L9k36CunmVsvdiQ5Rs42M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZThlMTBkNjk5MTNjMjAwMTc2ZWE1NDIiLCJpYXQiOjE1ODYzODA5MTQsImV4cCI6MTY0NjM4MDkxNH0.bTfDAB4G0wESE15pWHSg0_aOEclveFoqgYxlzvVIINQ
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="text"
@@ -268,7 +268,7 @@ Content-Type: application/json
 
 ### view all available(including blocked) jobs
 GET https://seasonal-jobs.herokuapp.com/api/admin/allavailablejobs/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODYzODU4NDgsImV4cCI6MTY0NjM4NTg0OH0.0NUSV1ln1_JkIIhycyWwN-vavINqLply-aKt0h-o8CM
 
 ### view all accepted jobs
 GET https://seasonal-jobs.herokuapp.com/api/admin/allacceptedjobs/1
@@ -276,15 +276,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZm
 
 ### view all Providers
 GET https://seasonal-jobs.herokuapp.com/api/admin/allproviders/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODYzODcyMTEsImV4cCI6MTY0NjM4NzIxMX0.SlVaU5_m8GYZ5z5AWnx0q79UmBxZk1Kg3S1bcLNhADY
 
 ### view all seekers
 GET https://seasonal-jobs.herokuapp.com/api/admin/allseekers/1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
 
 ### Blocking
-PATCH https://seasonal-jobs.herokuapp.com/api/admin/5e8465711034132abc7191a5/isblocked/?model=Job-Seeker 
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODU3Mzc1MjgsImV4cCI6MTY0NTczNzUyOH0.bmcxwlr3qNLvDewPZ3NalABsjDGS-CRAU2d_S8U1nUg
+PATCH http://localhost:8080/api/admin/5e8db57a9c93560017538a49/isblocked/?model=Job 
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTgzNDNjY2ZjMTZmODFkOTg2ZmI3YTIiLCJpYXQiOjE1ODYzODU4NDgsImV4cCI6MTY0NjM4NTg0OH0.0NUSV1ln1_JkIIhycyWwN-vavINqLply-aKt0h-o8CM
 
 ### logout
 DELETE https://seasonal-jobs.herokuapp.com/api/admin/logout/

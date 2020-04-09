@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
-
 const jobSeekerSchema = new Schema({
+
     name: {
         type: String,
         required: true
@@ -63,8 +63,5 @@ const jobSeekerSchema = new Schema({
     }
 }, { timestamps: true })
 
-
-
 const JobSeekerDetails = mongoose.model("jobSeekerDetail", jobSeekerSchema)
-
-module.exports=JobSeekerDetails
+module.exports=JobSeekerDetails;

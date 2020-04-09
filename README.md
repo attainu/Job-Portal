@@ -1,6 +1,8 @@
-# Job-Portal (**_Seasonal Jobs . Com_**)
+# Job-Portal (**_seasonal-jobs.com_**)
 
 Project done by _Siddhida_ and _Harish Ponna_
+
+Deployed URL: https://seasonal-jobs.herokuapp.com
 
 # Contributors
 
@@ -84,12 +86,11 @@ Project done by _Siddhida_ and _Harish Ponna_
       > GET https://seasonal-jobs.herokuapp.com/api/accountactivation/{Activation Token}?user=
              {Role}
 
+    - Login into Seeker Account
+      > POST https://seasonal-jobs.herokuapp.com/api/user/login
 
-       * Login into Seeker Account
-          > POST https://seasonal-jobs.herokuapp.com/api/user/login
-
-       * showing all jobs which are available
-          > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/{Page Number}/
+    - showing all jobs which are available
+       > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/{Page Number}/
 
 
        * filtering jobs by category of hourly, daily, weekly, monthly
@@ -195,7 +196,8 @@ Project done by _Siddhida_ and _Harish Ponna_
 - Bcrypt Js (_For Hashing_)
 - Helmet (_To Secure all Headings and Status_)
 - Compressor (_To compress the size of the data_)
-- Mongoose (_As Database_)
+- Mongoose (_To Connect to NoSQL Database_)
+- Mark Down (_To Make our read me file look better_)
 
 # Future Goals :
 

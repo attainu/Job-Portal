@@ -9,13 +9,11 @@ module.exports = {
     async allAvailableJobs(req, res) {
         try {
             const jobs = await JobDetails.find({ isAccepted: false,isBlocked:false })
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({isAccepted: false,isBlocked:false })
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
         }
         catch (error) {
@@ -36,61 +34,50 @@ module.exports = {
     // -----------------Filtering Available Jobs--------------------
     async filterJobs(req, res) {
         try {
-            if (!req.query) res.return("Please enter a definite query to filter out jobs")
+            if (!req.query) res.return({error:"Please enter a definite query to filter out jobs"})
             if (req.query.category) {
-                console.log("Request.Query.Category = ", req.query.category);
                 var jobs = await JobDetails.find({ isAccepted: false, category: req.query.category ,isBlocked:false})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({isAccepted: false, category: req.query.category,isBlocked:false})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                return res.status(200).json({ count,jobs })
             }
             if (req.query.city) {
                 var jobs = await JobDetails.find({isAccepted: false, city: req.query.city ,isBlocked:false})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({isAccepted: false, city: req.query.city,isBlocked:false})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })              
             }
             if (req.query.pincode) {
                 var jobs = await JobDetails.find({isAccepted: false, pincode: req.query.pincode ,isBlocked:false})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({})
                 .countDocuments({isAccepted: false, pincode: req.query.pincode,isBlocked:false});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
             }
             if (req.query.preference) {
                 var jobs = await JobDetails.find({isAccepted: false, preference: req.query.preference,isBlocked:false })
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({})
                 .countDocuments({isAccepted: false, preference: req.query.preference,isBlocked:false});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
             }
             if (req.query.keyword) {
                 var jobs = await JobDetails.find({isAccepted: false, keyword: req.query.keyword ,isBlocked:false})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({})
                 .countDocuments({isAccepted: false, keyword: req.query.keyword,isBlocked:false});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
             }           
         } catch (error) {
@@ -102,13 +89,13 @@ module.exports = {
     async allJobsAcceptedTillDateByAParticularSeeker(req, res) {
         try {
             const jobs = await JobDetails.find({ jobSeekerId: req.jobSeeker._id ,isBlocked:false})
-            .skip(((req.params.pagenumber) - 1) * 5)
-            .limit(5)
+            .skip(((req.params.pagenumber) - 1) * 10)
+            .limit(10)
             .sort({ createdAt: -1 });
             const count = await JobDetails.find({ jobSeekerId: req.jobSeeker._id,isBlocked:false})
             .countDocuments({});
             console.log({ jobSeekerId: req.jobSeeker._id ,isBlocked:false})
-            return res.status(200).send({count, allJobsAcceptedTillDateByAParticularSeeker: jobs })
+            return res.status(200).send({count, jobs: jobs })
 
         } catch (error) {
             console.log(error.message)
@@ -119,12 +106,12 @@ module.exports = {
     async jobsPostedByAParticularProvider(req, res) {
         try {
             const jobs = await JobDetails.find({jobProviderId: req.jobProvider._id ,isBlocked:false})
-            .skip(((req.params.pagenumber) - 1) * 5)
-            .limit(5)
+            .skip(((req.params.pagenumber) - 1) * 10)
+            .limit(10)
             .sort({ createdAt: -1 });
             const count = await JobDetails.find({jobProviderId: req.jobProvider._id,isBlocked:false})
             .countDocuments({});
-            return res.status(200).send({ allJobsPostedTillDateByAParticularProvider: jobs, count: count })       
+            return res.status(200).send({ jobs: jobs, count: count })       
         } catch (error) {
             console.log(error.message)
             return res.status(500).send({error:error.message})
@@ -143,8 +130,8 @@ module.exports = {
             const payload = await jwt.verify(req.params.activationtoken, process.env.TEMP_TOKEN_SECRET);
             if (payload) {
                 const updated = await schema.findOneAndUpdate( {activationToken: req.params.activationtoken},{ isVerified: true, activationToken: null })               
-                if (updated) return res.status(202).send("Account activated Successfully. Please visit SeasonalEmployment.com and Login");
-                return res.send({message:"Account already activated. Please visit our website and try logging In there."})
+                if (updated) return res.status(202).send({message:"Account activated Successfully. Please visit SeasonalEmployment.com and Login"});
+                return res.send({message:"Account already activated. Visit Seasonal Jobs website to login into your Account"})
             }
             return res.send({error:"Invalid Token"})
         }
@@ -159,13 +146,11 @@ module.exports = {
     async allAvailableJobsincludingBlocked(req, res) {
         try {
             const jobs = await JobDetails.find({ isAccepted: false })
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                  const count = await JobDetails.find({isAccepted: false})
                 .countDocuments({});
-                console.log("jobs=", jobs)
-                console.log("count=", count)
                 return res.status(200).json({ count,jobs })
         }
         catch (error) {
@@ -177,8 +162,8 @@ module.exports = {
     async allAcceptedJobs(req,res) {
         try {
             const jobs = await JobDetails.find({ isAccepted: true })
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                 const count = await JobDetails.find({isAccepted: true})
                 .countDocuments({});
@@ -192,10 +177,10 @@ module.exports = {
     async allProviders(req,res) {
         try {
             const jobProviders = await JobProviderDetails.find({isVerified:true})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
-                const count = await JobDetails.find({})
+                const count = await JobProviderDetails.find({})
                 .countDocuments({});
                 return res.status(200).json({ count,jobProviders })
         } catch (error) {
@@ -207,8 +192,8 @@ module.exports = {
     async allSeekers(req,res) {
         try {
             const jobSeekers = await JobSeekerDetails.find({isVerified:true})
-                .skip(((req.params.pagenumber) - 1) * 5)
-                .limit(5)
+                .skip(((req.params.pagenumber) - 1) * 10)
+                .limit(10)
                 .sort({ createdAt: -1 });
                 const count = await JobSeekerDetails.find({})
                 .countDocuments({});
