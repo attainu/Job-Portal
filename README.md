@@ -195,6 +195,7 @@ Project done by _Siddhida_ and _Harish Ponna_
 - Bcrypt Js (_For Hashing_)
 - Helmet (_To Secure all Headings and Status_)
 - Compressor (_To compress the size of the data_)
+- Mongoose (_As Database_)
 
 # Future Goals :
 

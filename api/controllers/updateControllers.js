@@ -17,7 +17,7 @@ module.exports = {
         try {
             await JobDetails.findOneAndUpdate({ id: req.params.jobid,isAccepted:false },{ ...req.body })
             console.log("job updated successfully by provider")
-            return res.status(202).send({message:'Job updated successfully by Job-Provider'})
+            return res.status(202).send({message:'Feel relaxed... You successfully updated your Job.'})
         }
         catch (error) {
             return res.status(500).send({error:error.message})
@@ -28,8 +28,7 @@ module.exports = {
     async isAcceptedJob(req, res) {
         try {
             const jobOne = await JobDetails.findOne({ _id: req.params.jobid})
-            if (jobOne.isAccepted) return res.send({error:"Job has already been accepted or doesn't exist"})
-
+            if (jobOne.isAccepted) return res.send({error:"Job has already been occupied or doesn't exist."})
             const job = await JobDetails.findOneAndUpdate({ _id: req.params.jobid },{ isAccepted: true, jobSeekerId: req.jobSeeker._id, jobSeekerName: req.jobSeeker.name, jobSeekerContactNumber: req.jobSeeker.contactNumber, jobSeekerAadhaarNumber: req.jobSeeker.aadhaarNumber })
 
             isAcceptedMailToProvider(job.jobProviderEmail, job.title, job.createdAt, req.jobSeeker.name);
@@ -39,7 +38,7 @@ module.exports = {
             const totalAccepted = jobSeekerJobsIncrement(jobSeekerDetails.totalAccepted);
             jobSeekerDetails.totalAccepted = totalAccepted;
             jobSeekerDetails.save()
-            return res.status(202).send({message:"Job accepted successfully"})
+            return res.status(202).send({message:"Look, you have Job accepted successfully. Hope, you will not let us down. All the Best."})
         }
         catch (err) {
             return res.status(500).send({error:err.message})
@@ -55,7 +54,7 @@ module.exports = {
             let imageResponse = await cloudinary.uploader.upload(imageContent)
             await schema.findOneAndUpdate({ _id: user._id }, { profilePicture: imageResponse.secure_url })
                 
-            res.status(202).send({message:"uploaded Profile picture successfully"})
+            res.status(202).send({message:"Wao! your New Display Picture is so Beautifull..."})
         } catch (error) {
             return res.status(500).send({error:error.message})
         }
@@ -68,7 +67,7 @@ module.exports = {
             if (req.jobSeeker) { var schema = JobSeekerDetails; user = req.jobSeeker }
             await schema.findOneAndUpdate({_id: user._id }, { contactNumber: req.body.contactNumber, address: req.body.address })
             const User = await schema.findOne({_id:user._id})
-            return res.status(202).send({message:"Profile Updated successfully",user:User})
+            return res.status(202).send({message:"All changes you wished are successfully done. Hope you are Happier.",user:User})
         } catch (error) {
             return res.status(500).send({error:error.message})
         }
@@ -83,7 +82,7 @@ module.exports = {
             console.log("hashed=", hashedPassword)
             console.log("user=", user)
             await schema.update({_id: user._id}, { password: hashedPassword })
-            return res.status(202).send({message:"Password changed successfully"})
+            return res.status(202).send({message:"Password changed successfully. Please do not share your password with anyone. Your Privacy is our utmost duty."})
 
         } catch (error) {
             return res.status(500).send({error:error.message})
@@ -96,14 +95,14 @@ module.exports = {
             if(req.query.model==="Job-Provider") var schema = JobProviderDetails;
             else if(req.query.model==="Job-Seeker") var schema = JobSeekerDetails;
             else if(req.query.model==="Job") var schema = JobDetails;
-            else return res.send({message:"please input valid query in route"});
+            else return res.send({message:"please insert correct role  of the person. Then only we can take due actions needed."});
             const update = await schema.findOneAndUpdate({_id:req.params.id},{isBlocked:true});
             if(!update) res.send("Invalid Id");
             if(req.query.model==="Job-Provider") {
                 var schema = JobDetails;
                 const Obj = await schema.updateMany({jobProviderId:req.params.id},{isBlocked:true})
             }
-            return res.status(202).send({message:"Blocked Succesfully"})
+            return res.status(202).send({message:"Blocked Succesfully. Will remain blocked untill found not guilty."})
         } catch (error) {
             console.log(error)
             return res.status(500).send({error:error.message})

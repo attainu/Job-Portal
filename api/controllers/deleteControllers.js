@@ -17,7 +17,7 @@ module.exports = {
             const totalPosted = jobProviderJobsDecrement(jobProviderDetails.totalPosted)
             jobProviderDetails.totalPosted = totalPosted;
             jobProviderDetails.save()
-            return res.status(202).send({message:"One job deleted Successfully"})
+            return res.status(202).send({message:"The job you requested is deleted Successfully"})
         } catch (error) {
             return res.status(404).send({error:error.message})
         }
@@ -30,7 +30,7 @@ module.exports = {
             if (req.jobSeeker) { var schema = JobSeekerDetails; var user = req.jobSeeker }
             if (req.admin) { var schema = AdminDetails; var user = req.admin }
             await schema.findOneAndUpdate({ _id: user._id }, { jwt: null })
-            return res.status(202).send({message:"You are successfully logged out"});
+            return res.status(202).send({message:"You are successfully logged out. Please visit us again."});
         } catch (error) {
             res.status(404).send({error:error.message})
         }

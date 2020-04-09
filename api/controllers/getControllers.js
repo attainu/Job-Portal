@@ -144,7 +144,7 @@ module.exports = {
             if (payload) {
                 const updated = await schema.findOneAndUpdate( {activationToken: req.params.activationtoken},{ isVerified: true, activationToken: null })               
                 if (updated) return res.status(202).send("Account activated Successfully. Please visit SeasonalEmployment.com and Login");
-                return res.send({message:"Account already activated"})
+                return res.send({message:"Account already activated. Please visit our website and try logging In there."})
             }
             return res.send({error:"Invalid Token"})
         }
