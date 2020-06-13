@@ -66,15 +66,15 @@ Deployed URL: https://seasonal-jobs.herokuapp.com
       > PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editprofile
 
 
-       * updating editing  password
-          > PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editpassword
+    - updating editing  password
+      > PATCH https://seasonal-jobs.herokuapp.com/api/jobprovider/editpassword
 
-       * Logging out from Provider Account
-          > DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/logout/
+    - Logging out from Provider Account
+      > DELETE https://seasonal-jobs.herokuapp.com/api/jobprovider/logout/
 
 
-       * forgot passsword sending system generated password
-          >  POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
+    - forgot passsword sending system generated password
+      > POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
 
 2.  SEEKER's ROUTES
 
@@ -93,33 +93,33 @@ Deployed URL: https://seasonal-jobs.herokuapp.com
        > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/allavailablejobs/{Page Number}/
 
 
-       * filtering jobs by category of hourly, daily, weekly, monthly
-          > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/filter/{Page Number}?category={Hourly/Daily/Weekly/Monthly}
+    - filtering jobs by category of hourly, daily, weekly, monthly
+      > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/filter/{Page Number}?category={Hourly/Daily/Weekly/Monthly}
 
-       * showing single job by jobId
-          > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobId/{Job Id}/
+    - showing single job by jobId
+      > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobId/{Job Id}/
 
-       * Job Accepting by Seeker
-            > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobid/{Job Id}/isaccepted
+    - Job Accepting by Seeker
+      > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/searchjobs/byjobid/{Job Id}/isaccepted
 
-       * showing jobs accepted by seeker till date
-            > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/jobsacceptedtilldate/{Page Number}
+    - showing jobs accepted by seeker till date
+      > GET https://seasonal-jobs.herokuapp.com/api/jobseeker/jobsacceptedtilldate/{Page Number}
 
-       *  Uploading Profile Picture
-            > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/uploadprofilepicture
+    - Uploading Profile Picture
+      > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/uploadprofilepicture
 
-       * udpating profile
-            > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editprofile
+    - udpating profile
+      > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editprofile
 
-       * Edit password
-            > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editpassword
+    - Edit password
+      > PATCH https://seasonal-jobs.herokuapp.com/api/jobseeker/editpassword
 
 
-       * Logging out from Seeker Account
-           > DELETE https://seasonal-jobs.herokuapp.com/api/jobseeker/logout
+    - Logging out from Seeker Account
+      > DELETE https://seasonal-jobs.herokuapp.com/api/jobseeker/logout
 
-       * forgot passsword sending system generated password
-            > POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
+    - forgot passsword sending system generated password
+      > POST https://seasonal-jobs.herokuapp.com/api/user/forgotpassword
 
 3.  Admin Routes
 
